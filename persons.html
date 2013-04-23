@@ -1,0 +1,71 @@
+<!doctype HTML>
+<html>
+<head>
+<title>Mass Casualty Incident Simulation</title>
+<script type="text/javascript" src="js/jquery.js"></script>
+<!-- tag definition -->
+<script type="text/javascript" src="js/persons.js"></script>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+	
+		var people = [];
+
+		persons_init(people);
+
+		listPersons(people);
+
+		//this might be attached to a canvas object
+		//layout needs more planning
+		$('div[id*=p-]').each(function(){
+			$(this).click(function(){
+				var id = parseInt($(this).attr('id').replace('p-',''));
+				console.log( 'test ' + $(this).attr('id').replace('p-','') );
+				displayPerson(people[id]);
+			});
+		});
+	});
+
+</script>
+<style type="text/css">@import "css/style.css";</style>
+</head>
+<body>
+
+<h1 id="title">People</h1>
+
+<h2>Selected Person</h2>
+<div id="current_vitals">
+
+	<div>
+	<label for="selected_name">Name:</label>
+	<div id="selected_name"></div>
+	</div>
+
+	<div>
+	<label for="selected_bp">Blood Pressure:</label>
+	<div id="selected_bp"></div>
+	</div>
+
+	<div>
+	<label for="selected_rr">Respiration Rate:</label>
+	<div id="selected_rr"></div>
+	</div>
+
+	<div>
+      <label for="selected_pr">Pulse:</label>
+	<div id="selected_pr"></div>
+	</div>
+
+	<div>
+	<label for="selected_other">Other:</label>
+	<div id="selected_other"></div>
+	</div>
+
+</div>
+
+<h2>All Persons</h2>
+
+<div id="persons_list"></div>
+
+</body>
+</html>
