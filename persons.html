@@ -10,9 +10,10 @@
 	$(document).ready(function(){
 	
 		var people = [];
+		var canvas = document.getElementById('canvas1');
 
 		persons_init(people);
-
+		
 		listPersons(people);
 
 		//this might be attached to a canvas object
@@ -22,6 +23,7 @@
 				var id = parseInt($(this).attr('id').replace('p-',''));
 				console.log( 'test ' + $(this).attr('id').replace('p-','') );
 				displayPerson(people[id]);
+				drawPerson(canvas, people[id]);
 			});
 		});
 	});
@@ -66,6 +68,12 @@
 <h2>All Persons</h2>
 
 <div id="persons_list"></div>
+
+<div class="canvas-layers">
+	<canvas id="canvas1" width="700" height="500" style="border: 1px solid black;">
+	This text is displayed if your browser does not support HTML5 Canvas.
+	</canvas>
+</div>
 
 </body>
 </html>

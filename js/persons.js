@@ -21,6 +21,20 @@ function Vitals(bp, pr, rr, other){
 	this.other = other;
 }//end of Vitals
 
+function drawPerson(c, p){
+
+	var ctx = c.getContext('2d');
+    var radius = 10;
+	
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, radius, 0, 2 * Math.PI, false);
+    ctx.fillStyle = 'green';
+    ctx.fill();
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = '#003300';
+    ctx.stroke();
+	
+}
 
 function displayPerson(p){
 
@@ -41,7 +55,7 @@ function displayPerson(p){
 	
 }//end of displayPerson
 
-function listPersons(people){
+function listPersons(canvas, people){
 
 	var plist = $('#persons_list');
 
@@ -56,21 +70,18 @@ function listPersons(people){
 				'</div>' +
 				'</div>'
 				);
-	
+		drawPerson(canvas, people[i]);
 	}
-
-
-
-
 }//end of listPersons
 
-function persons_init(people){
+function persons_init(canvas, people){
 
-	people[0] = new Person(0, 'Matt', '31', 'M', new Vitals('80/60', 140, 28, 'PEARL, Lung Sounds clear bilateral'), 0,0);
-	people[1] = new Person(1, 'Cindy', '29', 'M', new Vitals('120/80', 88, 16, 'PEARL, Lung Sounds clear bilateral'), 0,0);
+	people[0] = new Person(0, 'Matt', '31', 'M', new Vitals('80/60', 140, 28, 'PEARL, Lung Sounds clear bilateral'), 20,200);
+	people[1] = new Person(1, 'Cindy', '29', 'M', new Vitals('120/80', 88, 16, 'PEARL, Lung Sounds clear bilateral'), 200, 400);
 	//people[0] = new Person(0, 'Matt', '31', 'M');
-
 	//displayPerson(people[0]);
+	drawPerson(canvas, people[0]);
+	drawPerson(canvas, people[1]);
 	
 }//end of persons_init
 

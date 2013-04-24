@@ -32,10 +32,24 @@ function Shape(x, y, id) {
 Shape.prototype.draw = function(ctx) {
 	ctx.fillStyle = this.fill;
 	ctx.fillRect(this.x, this.y, this.w, this.h);
+	
+	console.log(this.x +',' +this.y +',' +this.w +',' +this.h);
+	
 	var startX = this.x;
 	var startY = this.y +this.baseh;
 	var stub_width = this.w;
 	var stub_height = this.stubh;
+	
+	//create the arrow
+	ctx.beginPath();
+	ctx.moveTo(this.x+1, this.y+this.baseh-1);
+	ctx.lineTo(this.x+(this.w/2), this.y+2);
+	ctx.lineTo(this.x+this.w-1, this.y+this.baseh-1);
+	ctx.lineWidth = 1;
+	ctx.closePath();
+	ctx.strokeStyle = '#000';
+	ctx.stroke();
+	
 	// deceased(black), immediate(red), delayed(yellow), minor(green)
 	var stub_colors =['#000','#FF1E00','#FFFB7D','#0BB505'];
 	for (var i=0; i<this.stubs; i++){
@@ -219,6 +233,8 @@ CanvasState.prototype.remove = function(shape) {
 
 CanvasState.prototype.clear = function() {
   this.ctx.clearRect(0, 0, this.width, this.height);
+  this.fillStyle = 'rgba(0,0,0,.1)';
+  
 }
 
 // While draw is called as often as the INTERVAL variable demands,
@@ -289,12 +305,11 @@ function getNewID(){
 	return id;
 }
 
-function init() {
-		var s = new CanvasState(document.getElementById('canvas1'));
+function tags_init(canvas) {
+		var s = new CanvasState(canvas);
 		//
 		s.addShape(new Shape(20,20,'tag 1'));
-		s.addShape(new Shape(40,25,'tag 2'));
-		
+		//s.addShape(new Shape(40,25,'tag 2'));
 		//s.addShape(new Shape(20,20+(stub_height*3),stub_width,stub_height, '#000'));
 		//s.addShape(new Shape(20,20+(stub_height*4),stub_width,stub_height, '#FF1E00'));
 		//s.addShape(new Shape(20,20+(stub_height*5),stub_width,stub_height, '#FFFB7D'));

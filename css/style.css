@@ -1,8 +1,15 @@
+body {min-width: 1000px; }
 
-#canvas_container{
-	border-style: solid;
-}
+#app-header {background-color: #969696; padding: 10px;}
+#app-title {font-weight: bold; font-size: 32px; margin: 20px; }
 
+#left-col{float: left; width: 70%; min-width: 700px; }
+#right-col{float: right; width: 30%; min-width: 300px;}
+
+.canvas-layers { position:relative; width:700px; height:500px; }
+.canvas-layers canvas {position:absolute; top:0; left:0 }
+
+#current_vitals{  }
 .personBtns { background-color: #ffcc00; width: 200px;}
-
 .person_container, #current_vitals {margin: 10px; border-style: solid; width: 200px; }
+

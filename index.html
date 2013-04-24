@@ -6,30 +6,102 @@
 <script type="text/javascript" src="js/jquery.js"></script>
 <!-- tag definition -->
 <script type="text/javascript" src="js/tags.js"></script>
+<script type="text/javascript" src="js/persons.js"></script>
 <script type="text/javascript">
 
 	$(document).ready(function(){
-	
-		init();
+
+		
+		
+		var people = [];
+		var canvas1 = document.getElementById('canvas1');
+		var canvas2 = document.getElementById('canvas2');
+
+		persons_init(canvas2, people);
+		
+		listPersons(canvas2, people);
+
+		//this might be attached to a canvas object
+		//layout needs more planning
+		$('div[id*=p-]').each(function(){
+			$(this).click(function(){
+				var id = parseInt($(this).attr('id').replace('p-',''));
+				console.log( 'test ' + $(this).attr('id').replace('p-','') );
+				displayPerson(people[id]);
+				
+			});
+		});
+		
+		tags_init(canvas1);
 		
 	});
 </script>
-
+<style type="text/css">@import "css/style.css";</style>
 </head>
 <body>
+<div id="app-header">
+	<table>
+	<tr>
+		<td><img src="images/adams_township_fire_200x200.png" height="50" width="50" alt="Adams Township Volunteer Fire Department Logo" /></td>
+		<td><span id="app-title">Mass Casualty Simulator</span></td>
+		<td><span id="simulation-name">Simulation 1</span></td>
+	</tr>
+	</table>
+</div><!--end of app-header -->
 
-<canvas id="canvas1" width="700" height="500" style="border: 1px solid black;">
-This text is displayed if your browser does not support HTML5 Canvas.
-</canvas>
+<div style="clear: both;"></div>
+<div id="left-col">
+	<div class="canvas-layers">
+		<canvas id="canvas2" width="700" height="500" style="border: 1px solid black; z-index: 0;"></canvas>
+		<canvas id="canvas1" width="700" height="500" style="border: 1px solid black; z-index: 1;">
+		This text is displayed if your browser does not support HTML5 Canvas.
+		</canvas>
+	</div>
+	
+	<div id="instructions" style="clear: both;">
+		<h2>Instructions</h2>
+		<div>Select a triage tag and hit 'T' to remove a stub</div>
+		<div>Use the =/- keys to increase size of highlighted triage tag</div>
+		<div>Hit 'a' to add a new triage tag</div>
+		<div>Hit 'd' to delete a triage tag</div>
+	</div>
+</div><!-- end of left_col -->
 
-<div>Select a triage tag and hit 'T' to remove a stub</div>
-<div>Use the =/- keys to increase size of highlighted triage tag</div>
-<div>Hit 'a' to add a new triage tag</div>
-<div>Hit 'd' to delete a triage tag</div>
+<div id="right-col">
+	<h2>Selected Person</h2>
+	<div id="current_vitals">
 
+		<div>
+		<span id="selected_name">Name:</span>
+		<div id="selected_name"></div>
+		</div>
 
+		<div>
+		<span id="selected_bp">Blood Pressure:</span>
+		<div id="selected_bp"></div>
+		</div>
 
+		<div>
+		<span id="selected_rr">Respiration Rate:</span>
+		<div id="selected_rr"></div>
+		</div>
 
+		<div>
+		  <span id="selected_pr">Pulse:</span>
+		<div id="selected_pr"></div>
+		</div>
+
+		<div>
+		<span id="selected_other">Other:</span>
+		<div id="selected_other"></div>
+		</div>
+
+	</div>
+
+	<h2>All Persons</h2>
+
+	<div id="persons_list"></div>	
+</div><!-- end of right_col -->
 
 </body>
 </html>
