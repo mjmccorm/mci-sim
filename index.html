@@ -23,8 +23,10 @@
 
 		//this might be attached to a canvas object
 		//layout needs more planning
-		$('div[id*=p-]').each(function(){
+		$('td[id*=p-]').each(function(){
+			console.log('attaching click listener');
 			$(this).click(function(){
+				console.log('test click');
 				var id = parseInt($(this).attr('id').replace('p-',''));
 				console.log( 'test ' + $(this).attr('id').replace('p-','') );
 				displayPerson(people[id]);
@@ -71,31 +73,32 @@
 	<h2>Selected Person</h2>
 	<div id="current_vitals">
 
-		<div>
-		<span id="selected_name">Name:</span>
-		<div id="selected_name"></div>
-		</div>
+		<table>
+		<tr>
+		<td class='vitals_label'>Name:</td>
+		<td id="selected_name"></td>
+		</tr>
 
-		<div>
-		<span id="selected_bp">Blood Pressure:</span>
-		<div id="selected_bp"></div>
-		</div>
+		<tr>
+		<td class='vitals_label'>Blood Pressure:</td>
+		<td id="selected_bp"></td>
+		</tr>
 
-		<div>
-		<span id="selected_rr">Respiration Rate:</span>
-		<div id="selected_rr"></div>
-		</div>
+		<tr>
+		<td class='vitals_label'>Respiration Rate:</td>
+		<td id="selected_rr"></td>
+		</tr>
 
-		<div>
-		  <span id="selected_pr">Pulse:</span>
-		<div id="selected_pr"></div>
-		</div>
+		<tr>
+		<td class='vitals_label'>Pulse:</td>
+		<td id="selected_pr"></td>
+		</tr>
 
-		<div>
-		<span id="selected_other">Other:</span>
-		<div id="selected_other"></div>
-		</div>
-
+		<tr>
+		<td class='vitals_label'>Other:</td>
+		<td id="selected_other"></td>
+		</tr>
+		</table>
 	</div>
 
 	<h2>All Persons</h2>

@@ -3,13 +3,15 @@ body {min-width: 1000px; }
 #app-header {background-color: #969696; padding: 10px;}
 #app-title {font-weight: bold; font-size: 32px; margin: 20px; }
 
-#left-col{float: left; width: 70%; min-width: 700px; }
-#right-col{float: right; width: 30%; min-width: 300px;}
+#left-col{float: left; width: 60%; min-width: 700px; }
+#right-col{float: right; width: 40%; min-width: 300px;}
 
 .canvas-layers { position:relative; width:700px; height:500px; }
 .canvas-layers canvas {position:absolute; top:0; left:0 }
 
-#current_vitals{  }
-.personBtns { background-color: #ffcc00; width: 200px;}
-.person_container, #current_vitals {margin: 10px; border-style: solid; width: 200px; }
+#current_vitals table {width: 98%; border-spacing: 0px; border-collapse: collapse;}
+#current_vitals table td{border-style: solid;   }
+.vitals_label{width: 125px; color: #000;}
 
+#persons_list table {margin-bottom: 10px; width: 98%; border-spacing: 0px; border-collapse: collapse; }
+#persons_list table td{border-style: solid;   }

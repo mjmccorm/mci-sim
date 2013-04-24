@@ -1,4 +1,4 @@
-function Person(id, name, age, gender, vitals, x, y){
+function Person(id, name, age, gender, vitals, x, y, status){
 	this.id = id || 0;
 	this.name = name || 'John Doe';
 	this.age = age || 0;
@@ -6,6 +6,7 @@ function Person(id, name, age, gender, vitals, x, y){
 	this.x = x || 0;
 	this.y = y || 0;
 	this.triage_tag_id = 0;
+	this.triage_status = status || 'Not assigned';
 
 	//keep track of vitals.
 	//this.vital_history = [];
@@ -63,13 +64,24 @@ function listPersons(canvas, people){
 		console.log(i);
 		console.log(people[i].name);
 		console.log(people[i].current_vitals.bp);
-		plist.append( "<div class='person_container'>" +
+		/*plist.append( "<div class='person_container'>" +
 				'<div id="p-' + i + '">'+ people[i].name +
 				'</div>' +
 				'<div>' + people[i].current_vitals.bp + 
 				'</div>' +
 				'</div>'
-				);
+				);*/
+		plist.append(
+				"<table>" +
+				"<tr>" +
+				"<td class='vitals_label'>Name:</td>" +
+				"<td id='p-" + i + "'>" + people[i].name + "</td>" +
+				"</tr>" +
+				"<tr>" +
+				"<td class='vitals_label'>Triage Status:</td>" +
+				"<td>" + people[i].triage_status +"</td>" +
+				"</tr>" +
+				"</table>");
 		drawPerson(canvas, people[i]);
 	}
 }//end of listPersons
