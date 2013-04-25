@@ -10,6 +10,9 @@
 // Constructor for Shape objects to hold data for all drawn objects.
 // For now they will just be defined as rectangles.
 //function Shape(x, y, w, h, fill) {
+/*-----------------------------------------------------------*/
+// Shape - object
+/*-----------------------------------------------------------*/
 function Shape(x, y, id) {
   // This is a very simple and unsafe constructor. All we're doing is checking if the values exist.
   // "x || 0" just means "if there is a value for x, use that. Otherwise use 0."
@@ -28,7 +31,9 @@ function Shape(x, y, id) {
 	
 }
 
+/*-----------------------------------------------------------*/
 // Draws this shape to a given context
+/*-----------------------------------------------------------*/
 Shape.prototype.draw = function(ctx) {
 	ctx.fillStyle = this.fill;
 	ctx.fillRect(this.x, this.y, this.w, this.h);
@@ -58,8 +63,9 @@ Shape.prototype.draw = function(ctx) {
 		startY += stub_height;
 	}
 }
-
+/*-----------------------------------------------------------*/
 // Make the object bigger or smaller
+/*-----------------------------------------------------------*/
 Shape.prototype.transform = function(factor){
 	console.log("Scale Factor: " + this.scale_factor);
 	
@@ -70,7 +76,9 @@ Shape.prototype.transform = function(factor){
 	this.h += (this.scale_factor * factor);
 }
 
+/*-----------------------------------------------------------*/
 // Determine if a point is inside the shape's bounds
+/*-----------------------------------------------------------*/
 Shape.prototype.contains = function(mx, my) {
   // All we have to do is make sure the Mouse X,Y fall in the area between
   // the shape's X and (X + Height) and its Y and (Y + Height)
@@ -78,6 +86,9 @@ Shape.prototype.contains = function(mx, my) {
           (this.y <= my) && (this.y + this.h >= my);
 }
 
+/*-----------------------------------------------------------*/
+// CanvasState - object
+/*-----------------------------------------------------------*/
 function CanvasState(canvas) {
   // **** First some setup! ****
   
@@ -221,24 +232,32 @@ function CanvasState(canvas) {
   setInterval(function() { myState.draw(); }, myState.interval);
 }
 
+/*-----------------------------------------------------------*/
+/*-----------------------------------------------------------*/
 CanvasState.prototype.addShape = function(shape) {
   this.shapes.push(shape);
   this.valid = false;
 }
 
+/*-----------------------------------------------------------*/
+/*-----------------------------------------------------------*/
 CanvasState.prototype.remove = function(shape) {
 	
 		console.log("Search for shape and remove");
 }
 
+/*-----------------------------------------------------------*/
+/*-----------------------------------------------------------*/
 CanvasState.prototype.clear = function() {
   this.ctx.clearRect(0, 0, this.width, this.height);
   this.fillStyle = 'rgba(0,0,0,.1)';
   
 }
 
+/*-----------------------------------------------------------*/
 // While draw is called as often as the INTERVAL variable demands,
 // It only ever does something if the canvas gets invalidated by our code
+/*-----------------------------------------------------------*/
 CanvasState.prototype.draw = function() {
   // if our state is invalid, redraw and validate!
   if (!this.valid) {
@@ -273,9 +292,10 @@ CanvasState.prototype.draw = function() {
   }
 }
 
-
+/*-----------------------------------------------------------*/
 // Creates an object with x and y defined, set to the mouse position relative to the state's canvas
 // If you wanna be super-correct this can be tricky, we have to worry about padding and borders
+/*-----------------------------------------------------------*/
 CanvasState.prototype.getMouse = function(e) {
   var element = this.canvas, offsetX = 0, offsetY = 0, mx, my;
   
@@ -299,12 +319,18 @@ CanvasState.prototype.getMouse = function(e) {
   return {x: mx, y: my};
 }
 
+/*-----------------------------------------------------------*/
+// getNewID - this will be used to get a triage tag id
+/*-----------------------------------------------------------*/
 function getNewID(){
 	
 	var id = '';
 	return id;
 }
 
+/*-----------------------------------------------------------*/
+// tags_init - displays a tag on screen to add to a person
+/*-----------------------------------------------------------*/
 function tags_init(canvas) {
 		var s = new CanvasState(canvas);
 		//

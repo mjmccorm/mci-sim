@@ -7,20 +7,21 @@
 <!-- tag definition -->
 <script type="text/javascript" src="js/tags.js"></script>
 <script type="text/javascript" src="js/persons.js"></script>
+<script type="text/javascript" src="js/events.js"></script>
 <script type="text/javascript">
 
 	$(document).ready(function(){
-
-		
-		
+	
 		var people = [];
+		//canvas1 is tags canvas
 		var canvas1 = document.getElementById('canvas1');
+		//canvas2 is persons canvas
 		var canvas2 = document.getElementById('canvas2');
-
+	
+		//initial display
 		persons_init(canvas2, people);
+		tags_init(canvas1);
 		
-		listPersons(canvas2, people);
-
 		//this might be attached to a canvas object
 		//layout needs more planning
 		$('td[id*=p-]').each(function(){
@@ -34,8 +35,26 @@
 			});
 		});
 		
-		tags_init(canvas1);
+		$("#deathButton").click(function(){
+			var randomPerson = getRandomInt(0, people.length - 1);	
+			console.log("Killing person " + randomPerson);
+			console.log("Before: " + printVitals(people[randomPerson].current_vitals));
+			people[randomPerson].current_vitals = new BodyState('death', people[randomPerson].age);
+			console.log("After: " + printVitals(people[randomPerson].current_vitals));
+			displayPerson(people[randomPerson]);
+			listPersons(people);
+			
+		});
 		
+		$("#normalButton").click(function(){
+			var randomPerson = getRandomInt(0, people.length - 1);
+			console.log("Normalizing person " + randomPerson);
+			console.log("Before: " + printVitals(people[randomPerson].current_vitals));
+			people[randomPerson].current_vitals = new BodyState('normal', people[randomPerson].age);
+			console.log("Before: " + printVitals(people[randomPerson].current_vitals));
+			displayPerson(people[randomPerson]);
+			listPersons(people);
+		});
 	});
 </script>
 <style type="text/css">@import "css/style.css";</style>
@@ -104,6 +123,11 @@
 	<h2>All Persons</h2>
 
 	<div id="persons_list"></div>	
+	
+	<div>
+		<button id="deathButton">Kill Randomly</button>
+		<button id="normalButton">Normal Status</button>
+	</div>
 </div><!-- end of right_col -->
 
 </body>
