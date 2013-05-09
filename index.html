@@ -22,6 +22,10 @@
 		persons_init(canvas2, people);
 		tags_init(canvas1);
 		
+		//http://stackoverflow.com/questions/2010892/storing-objects-in-html5-localstorage
+		localStorage.setItem('people',  JSON.stringify(people));
+		//console.log(localStorage.getItem('people'));
+		
 		//this might be attached to a canvas object
 		//layout needs more planning
 		$('td[id*=p-]').each(function(){

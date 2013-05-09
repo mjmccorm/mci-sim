@@ -190,6 +190,8 @@ function CanvasState(canvas) {
 	//the 'd' key
 	if(e.keyCode == 68 && myState.selection != null){
 		console.log('deleting item');
+		console.log(myState.shapes.length);
+		console.log(myState.selection);
 		myState.remove(myState.selection);
 		//myState.selection.transform(1);
 		myState.valid = false;

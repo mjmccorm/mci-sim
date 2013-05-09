@@ -126,8 +126,12 @@ function persons_init(canvas, people){
 	//people[0] = new Person(0, 'Matt', 'M', '31', new Vitals('80/60', 140, 28, 'PEARL, Lung Sounds clear bilateral'), 20,200);
 	//people[1] = new Person(1, 'Cindy','M', '29', new Vitals('120/80', 88, 16, 'PEARL, Lung Sounds clear bilateral'), 200, 400);
 	/* You can let People be defined randomly */
+	
+	//for true randomness randomly generate name and gender
 	people[0] = new Person(0, 'Matt','M');
 	people[1] = new Person(1, 'Cindy','F');
+	
+	people[1].triage_status = 'delayed';
 	
 	//draw them on screen for tagging
 	drawPersons(canvas, people);
