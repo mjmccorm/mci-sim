@@ -94,6 +94,22 @@ function BodyState(body_state_type, a){
 			other = 'pupils fixed and dilated';
 			break;
 		
+		case('compensated'):
+			rr = 0;
+			pr = 0;
+			systolic_bp = 0; 
+			diastolic_bp = 0; 
+			other = 'pupils equal and reactive';
+			break;
+			
+		case('decompensated'):
+			rr = 0;
+			pr = 0;
+			systolic_bp = 0; 
+			diastolic_bp = 0; 
+			other = 'pupils equal and reactive';
+			break;
+		
 		default:
 			rr = 0;
 			pr = 0;
