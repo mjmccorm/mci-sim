@@ -1,0 +1,337 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+      #buttons {
+        position: absolute;
+        left: 10px;
+        top: 0px;
+      }
+      button {
+        margin-top: 10px;
+        display: block;
+      }
+
+      #container {
+	position: absolute;
+
+	left: 10px;
+	top: 100px;
+	border-style: solid;
+      }
+	  
+	 #patient_info {
+	 position: absolute;
+	 left: 10px;
+	 top: 650px;
+	 }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <div id="buttons">
+      <button id="toBlue">
+        Move red box to blue group
+      </button>
+      <button id="toYellow">
+        Move red box to yellow group
+      </button>
+	  <button id="addTag">
+        Add a triage tag
+      </button>
+	  
+    </div>
+	<div id="patient_info">TEST</div>
+    <script src="js/kinetic-v4.5.4.min.js"></script>
+    <script defer="defer">
+
+	var stage = new Kinetic.Stage({
+	container: 'container',
+	width: 800,
+	height: 500
+	});
+
+	var groups = [];
+	var circles = [];
+	var triage_tags = [];
+
+	var layer = new Kinetic.Layer();
+    
+	/*stage.on('keydown', function(e) {
+		if(e.keyCode == 65){
+			console.log("A key pressed");
+		}
+	});
+	*/
+	
+	groups[0] = new Kinetic.Group({
+	x: 200,
+	y: 100,
+	draggable: true
+	});
+
+	groups[1] = new Kinetic.Group({
+	x: 400,
+	y: 80,
+	draggable: true
+	});
+	
+	
+	
+	var greenTarp = new Kinetic.Rect({
+	x: 600,
+	y: 20,
+	width: 150,
+	height: 100,
+	fill: 'green',
+	stroke: 'black'
+	});
+	
+	var yellowTarp = new Kinetic.Rect({
+	x: 600,
+	y: 130,
+	width: 150,
+	height: 100,
+	fill: 'yellow',
+	stroke: 'black'
+	});
+	
+	var redTarp = new Kinetic.Rect({
+	x: 600,
+	y: 240,
+	width: 150,
+	height: 100,
+	fill: 'red',
+	stroke: 'black'
+	});
+	
+	var blackTarp = new Kinetic.Rect({
+	x: 600,
+	y: 350,
+	width: 150,
+	height: 100,
+	fill: 'black',
+	stroke: 'black'
+	});
+	
+	circles[0] = new Kinetic.Circle({
+	x: 0,
+	y: 0,
+	radius: 50,
+	fill: 'yellow',
+	stroke: 'black',
+	strokeWidth: 5,
+	id: 'p01',
+	});
+
+	circles[0].on('dblclick', function(){
+		var stroke = this.getStroke();
+		this.setStroke(stroke === 'black' ? 'red' : 'black');
+		layer.draw();
+	});
+	
+	//when patient is clicked on, update patient info section
+	circles[0].on('click', function() {
+		document.getElementById('patient_info').innerHTML = this.attrs.id;
+	});
+	
+	circles[1] = new Kinetic.Circle({
+	x: 0,
+	y: 0,
+	radius: 50,
+	fill: 'blue',
+	stroke: 'black',
+	strokeWidth: 5,
+	id: 'p02'
+	});
+
+	circles[1].on('dblclick', function(){
+		var stroke = this.getStroke();
+		this.setStroke(stroke === 'black' ? 'red' : 'black');
+		layer.draw();
+	});
+	
+		//when patient is clicked on, update patient info section
+	circles[1].on('click', function() {
+		document.getElementById('patient_info').innerHTML = this.attrs.id;
+	});
+	
+	// initialize
+	
+	groups[0].add(circles[0]);
+	groups[1].add(circles[1]);
+	layer.add(greenTarp);
+	layer.add(yellowTarp);
+	layer.add(redTarp);
+	layer.add(blackTarp);
+	layer.add(groups[0]);
+	layer.add(groups[1]);
+	layer.add(addTag());
+	stage.add(layer);
+	
+	// add button event bindings
+	document.getElementById('toBlue').addEventListener('click', function() {
+		box.moveTo(groups[1]);
+		layer.draw();
+	}, false);
+
+	document.getElementById('toYellow').addEventListener('click', function() {
+		box.moveTo(groups[0]);
+		layer.draw();
+	}, false);
+	
+	document.getElementById('addTag').addEventListener('click', function() {
+		console.log(triage_tags.length);
+		layer.add(addTag());
+		layer.draw();
+	}, false);
+
+	for(var i=0; i <triage_tags.length; i++){
+		// write out drag and drop events
+		triage_tags[i].on('dragstart', function() {
+			console.log("triage_tags:" + triage_tags.length);
+			console.log(triage_tags.toString());
+			triage_tags[i].moveToTop();
+		});
+		
+		triage_tags[i].on('dragmove', function() {
+		
+		});
+		
+		//double click to remove a triage tag
+		triage_tags[i].on('dblclick', function() {
+			triage_tags[i].remove();
+			//need to delete from array or set to null
+			layer.draw();
+		});
+		
+		triage_tags[i].on('dragend', function() {
+			console.log('stop dragging red box');
+			var mousePos = stage.getMousePosition();
+			console.log('x:' +mousePos.x + ', y:' +mousePos.y);
+			//check to see if x and y exist within anyother shapes
+			//x0,y0 is center of group with radius r
+			//x1,y1 is point clicked
+			//Math.sqrt((x1-x0)*(x1-x0) + (y1-y0)*(y1-y0)) < r
+			//foreach shape
+			// if formual true then merge into a group and break.
+			//change border on shape to indicate connection
+			
+			var x1 = mousePos.x;
+			var y1 = mousePos.y;
+			for(var j=0; j<groups.length; j++){
+				var r = groups[j].getChildren().toArray()[0].attrs.radius
+				var x0 = groups[j].getX();
+				var y0 = groups[j].getY();
+				//compare the mouse clicked point to the underlying shape
+				if(Math.sqrt((x1-x0)*(x1-x0) + (y1-y0)*(y1-y0)) < r){
+					console.log("AWESOME");
+					triage_tags[i].moveTo(groups[j]);
+					triage_tags[i].setPosition((r-10)*-1,(r-10)*-1);
+					layer.draw();
+					break;
+				}else{
+					triage_tags[i].moveTo(layer);
+					triage_tags[i].setPosition(0,0);
+					layer.draw();
+				}
+			}
+		
+		});
+		
+		
+	} //end of for loop
+ 
+	//adds a triage tag to the triage_tags array
+	function addTag(){
+		var temp = triage_tags.length;
+		console.log('adding tag: ' + temp);
+		
+		triage_tags[temp] = new Kinetic.Group({
+		x: 10,
+		y: 10,
+		draggable: true
+		});
+		
+		var box = new Kinetic.Rect({
+		x: 10,
+		y: 10,
+		width: 100,
+		height: 50,
+		fill: 'white',
+		stroke: 'black',
+		draggable: false
+		});
+		
+		var box1 = new Kinetic.Rect({
+		x: 10,
+		y: 60,
+		width: 100,
+		height: 50,
+		fill: 'black',
+		stroke: 'black',
+		draggable: false
+		});
+		
+		var box2 = new Kinetic.Rect({
+		x: 10,
+		y: 110,
+		width: 100,
+		height: 50,
+		fill: 'red',
+		stroke: 'black',
+		draggable: false
+		});
+		
+		var box3 = new Kinetic.Rect({
+		x: 10,
+		y: 160,
+		width: 100,
+		height: 50,
+		fill: 'yellow',
+		stroke: 'black',
+		draggable: false
+		});
+		
+		var box4 = new Kinetic.Rect({
+		x: 10,
+		y: 210,
+		width: 100,
+		height: 50,
+		fill: 'green',
+		stroke: 'black',
+		draggable: false
+		});
+		
+		triage_tags[temp].add(box);
+		triage_tags[temp].add(box1);
+		triage_tags[temp].add(box2);
+		triage_tags[temp].add(box3);
+		triage_tags[temp].add(box4);
+		triage_tags[temp].setScale(0.3);
+		
+		
+		return triage_tags[temp];
+	}
+ 
+    //this function should see if a point is within the bounds of any shape on the screen
+	function checkShape(x1,y1){
+		for(var i=0; i<groups.length; i++){
+			var r = groups[i].getChildren().toArray()[0].attrs.radius
+			var x0 = groups[i].getX();
+			var y0 = groups[i].getY();
+			//compare the mouse clicked point to the underlying shape
+			if(Math.sqrt((x1-x0)*(x1-x0) + (y1-y0)*(y1-y0)) < r){
+				return shape;
+			}
+		}
+		return false;
+	}
+	
+    </script>
+  </body>
+</html>

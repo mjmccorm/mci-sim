@@ -1,0 +1,326 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <style>
+
+        </style>
+
+        <script>
+       
+
+function getRandomInt(min, max){
+
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+
+}
+
+function init(){
+
+
+	//NORMAL
+	normal_systolic_bp = document.getElementById('normal_systolic_bp');
+	normal_diastolic_bp = document.getElementById('normal_diastolic_bp');
+	normal_pr = document.getElementById('normal_pr');
+	normal_rr = document.getElementById('normal_rr');
+
+	sys = getRandomInt(100,125);
+	dia = getRandomInt(60,sys);
+	pr = getRandomInt(60,80);
+	rr = getRandomInt(12,20);
+
+	normal_systolic_bp.innerHTML += sys;
+	normal_diastolic_bp.innerHTML += dia;
+	normal_pr.innerHTML += pr;		
+	normal_rr.innerHTML += rr;
+
+
+	//COMPENSATED SHOCK
+	compensated_systolic_bp = document.getElementById('compensated_systolic_bp');
+	compensated_diastolic_bp = document.getElementById('compensated_diastolic_bp');
+	compensated_pr = document.getElementById('compensated_pr');
+	compensated_rr = document.getElementById('compensated_rr');
+
+	sys = getRandomInt(100,125);
+	dia = getRandomInt(60,sys);
+	pr = getRandomInt(95,140);
+	rr = getRandomInt(18,30);
+
+	compensated_systolic_bp.innerHTML += sys;
+	compensated_diastolic_bp.innerHTML += dia;
+	compensated_pr.innerHTML += pr;		
+	compensated_rr.innerHTML += rr;
+
+
+	//DECOMPENSATED SHOCK
+
+	decompensated_systolic_bp = document.getElementById('decompensated_systolic_bp');
+	decompensated_diastolic_bp = document.getElementById('decompensated_diastolic_bp');
+	decompensated_pr = document.getElementById('decompensated_pr');
+	decompensated_rr = document.getElementById('decompensated_rr');
+
+	sys = getRandomInt(80,100);
+	dia = getRandomInt(40,sys);
+	pr = getRandomInt(95,140);
+	rr = getRandomInt(22,30);
+
+	decompensated_systolic_bp.innerHTML += sys;
+	decompensated_diastolic_bp.innerHTML += dia;
+	decompensated_pr.innerHTML += pr;		
+	decompensated_rr.innerHTML += rr;
+
+	//INCOMPATIBLE WITH LIFE (IRREVERSIBLE)
+	incompatible_systolic_bp = document.getElementById('incompatible_systolic_bp');
+	incompatible_diastolic_bp = document.getElementById('incompatible_diastolic_bp');
+	incompatible_pr = document.getElementById('incompatible_pr');
+	incompatible_rr = document.getElementById('incompatible_rr');
+
+	sys = getRandomInt(0,20);
+	dia = getRandomInt(0,sys);
+	pr = getRandomInt(0,10);
+	rr = getRandomInt(0,8);
+
+	incompatible_systolic_bp.innerHTML += sys;
+	incompatible_diastolic_bp.innerHTML += dia;
+	incompatible_pr.innerHTML += pr;		
+	incompatible_rr.innerHTML += rr;
+
+	//DEAD
+	dead_systolic_bp = document.getElementById('dead_systolic_bp');
+	dead_diastolic_bp = document.getElementById('dead_diastolic_bp');
+	dead_pr = document.getElementById('dead_pr');
+	dead_rr = document.getElementById('dead_rr');
+
+	sys = 0;
+	dia = 0;
+	pr = 0;
+	rr = 0;
+
+	dead_systolic_bp.innerHTML += sys;
+	dead_diastolic_bp.innerHTML += dia;
+	dead_pr.innerHTML += pr;		
+	dead_rr.innerHTML += rr;
+
+	//RANDOM
+	random_age = document.getElementById('random_age');
+	random_systolic_bp = document.getElementById('random_systolic_bp');
+	random_diastolic_bp = document.getElementById('random_diastolic_bp');
+	random_pr = document.getElementById('random_pr');
+	random_rr = document.getElementById('random_rr');
+	random_condition = document.getElementById('random_condition');
+
+	age = getRandomInt(1, 80);
+	randomVitals = getVitals(age, getCondition());
+
+	sys = randomVitals.systolic_bp;
+	dia = randomVitals.diastolic_bp;
+	pr = randomVitals.pr;
+	rr = randomVitals.rr;
+	con = randomVitals.condition;
+
+	random_age.innerHTML += age;
+	random_systolic_bp.innerHTML += sys;
+	random_diastolic_bp.innerHTML += dia;
+	random_pr.innerHTML += pr;		
+	random_rr.innerHTML += rr;
+	random_condition.innerHTML +=  con;
+
+}
+
+function getCondition(){
+
+	var injuries = [
+		'deformity',
+		'contusion',
+		'abrasion',
+		'penetration',
+		'burn',
+		'laceration',
+		'swelling',
+		'tenderness',
+		'instability',
+		'crepitus',
+		'avulsion',
+		'amputation']
+	
+	var bodyParts = [
+		'head',
+		'neck',
+		'chest',
+		'abdomen',
+		'groin',
+		'left foot',
+		'right foot',
+		'left ankle',
+		'right ankle',
+		'left lower leg',
+		'right lower leg',
+		'left knee',
+		'right knee',
+		'left upper leg',
+		'right upper leg',
+		'lumbar spine',
+		'thoracic spine',
+		'cervical spine',
+		'left shoulder',
+		'right shoulder',
+		'left upper arm',
+		'right upper arm',
+		'left elbow',
+		'right elbow',
+		'left lower arm',
+		'right lower arm',
+		'left wrist',
+		'right wrist',
+		'left hand',
+		'right hand'
+		];
+	
+	
+	return {
+		injury: injuries[getRandomInt(0, injuries.length-1)],
+		bodyPart: bodyParts[getRandomInt(0, bodyParts.length-1)]
+		};
+}
+
+function getVitals(age, condition){
+	
+	var sys_bp = 0;
+	var dia_bp = 0;
+	var resp = 0;
+	var pulse = 0;
+	var cond = condition.injury + ", " + condition.bodyPart;
+	
+	age = parseInt(age);
+	console.log(age);
+	
+	switch(true){
+	
+		case age < 1:
+			//new born vitals
+			resp = getRandomInt(20,50);
+			pulse = getRandomInt(80,140);
+			sys_bp = 80 + 2*age;
+			dia_bp = (2/3) * sys_bp;
+			break;
+			
+		case (age >= 1) && (age <3):
+			//toddler
+			resp = getRandomInt(20,30);
+			pulse = getRandomInt(80,130);
+			sys_bp = 80 + 2*age;
+			dia_bp = (2/3) * sys_bp;
+			break;
+		case (age >= 3) && (age <6):
+			//pulseeschooler
+			resp = getRandomInt(20,30);
+			pulse = getRandomInt(80,120);
+			sys_bp = getRandomInt(78,104);
+			dia_bp = getRandomInt(60,sys_bp); //ave 65
+			break;
+		case (age >= 6) && (age <10):
+			//school age
+			resp = getRandomInt(15,30);
+			pulse = getRandomInt(70,110);
+			sys_bp = getRandomInt(80,115);
+			dia_bp = getRandomInt(65,sys_bp); //ave 69
+			break;
+		case (age >=10) && (age <15):
+			//adolescent
+			resp = getRandomInt(12,20);
+			pulse = getRandomInt(60,105);
+			sys_bp = getRandomInt(88,120);
+			dia_bp = getRandomInt(70,sys_bp); //ave 76
+			break;
+		case age >=15:
+			//adult
+			console.log('normal adult');
+			resp = getRandomInt(12,20);
+			pulse = getRandomInt(60,100);
+			sys_bp = getRandomInt(90,130); //ave 120
+			dia_bp = getRandomInt(60,sys_bp); //ave 80
+			console.log("normal resp: " + resp + ", pulse: " + pulse + "sys_bp: " + sys_bp + ", dia_bp:" + dia_bp);
+			break;
+			
+		default:
+			console.log('age not found');
+			resp = 0;
+			pulse = 0;
+			sys_bp = 0;
+			dia_bp = 0;
+			break;
+	
+	}//end of switch
+	
+	return {
+		systolic_bp: sys_bp,
+		diastolic_bp: dia_bp,
+		pr: pulse,
+		rr: resp,
+		condition: cond
+		};
+		
+}//end of getVitals
+
+        </script>
+    </head>
+    <body onload="init();">
+     
+	<h1>Random Vitals</h1>
+
+	<h2>Random</h2>
+	<ul>
+	<li id="random_systolic_bp">Systolic BP:</li>
+	<li id="random_diastolic_bp">Diastolic BP:</li>
+	<li id="random_pr">Pulse:</li>
+	<li id="random_rr">Respirations:</li>
+	<li id="random_age">Age:</li>
+	<li id="random_condition">Condition:</li>
+	</ul>
+	
+	<h2>Normal</h2>
+	<ul>
+	<li id="normal_systolic_bp">Systolic BP:</li>
+	<li id="normal_diastolic_bp">Diastolic BP:</li>
+	<li id="normal_pr">Pulse:</li>
+	<li id="normal_rr">Respirations:</li>
+	</ul>
+
+	
+	<h2>Compensated Shock</h2>
+	<ul>
+	<li id="compensated_systolic_bp">Systolic BP:</li>
+	<li id="compensated_diastolic_bp">Diastolic BP:</li>
+	<li id="compensated_pr">Pulse:</li>
+	<li id="compensated_rr">Respirations:</li>
+	</ul>
+
+	<h2>Decompensated Shock</h2>
+	<ul>
+	<li id="decompensated_systolic_bp">Systolic BP:</li>
+	<li id="decompensated_diastolic_bp">Diastolic BP:</li>
+	<li id="decompensated_pr">Pulse:</li>
+	<li id="decompensated_rr">Respirations:</li>
+	</ul>
+
+	<h2>Incompatible with Life</h2>
+	<ul>
+	<li id="incompatible_systolic_bp">Systolic BP:</li>
+	<li id="incompatible_diastolic_bp">Diastolic BP:</li>
+	<li id="incompatible_pr">Pulse:</li>
+	<li id="incompatible_rr">Respirations:</li>
+	</ul>
+
+
+	<h2>Dead</h2>
+	<ul>
+	<li id="dead_systolic_bp">Systolic BP:</li>
+	<li id="dead_diastolic_bp">Diastolic BP:</li>
+	<li id="dead_pr">Pulse:</li>
+	<li id="dead_rr">Respirations:</li>
+	</ul>
+	
+
+	
+
+    </body>
+</html>

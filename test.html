@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <style type='text/css'>
+			#myCanvas {
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			border: 1px solid #9C9898;
+			z-index: 1;
+			}
+			#container{
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			z-index: 2;
+			}
+
+        </style>
+	<script src="js/kinetic-v4.5.4.min.js">
+	</script>
+        <script src="js/animation.js">
+        </script>
+        <script src="js/Controller.js">
+        </script>
+        <script src="js/Model.js">
+        </script>
+		<script src="js/View.js">
+        </script>
+		<script src="js/Vitals.js">
+        </script>
+		<script src="js/Tag.js">
+        </script>
+        <script src="js/Actor.js">
+        </script>
+        <script src="js/HealthBar.js">
+        </script>
+        <script>
+            window.onload = function(){
+                new Controller("myCanvas");
+            };
+        </script>
+    </head>
+    <body>
+	<div id="container" width="900" height="600"></div>
+    </body>
+</html>
