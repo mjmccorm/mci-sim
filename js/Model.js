@@ -49,7 +49,8 @@ Model.prototype.updateStage() = function() {
 
 Model.prototype.updateActor = function(actor, model){
 
-	console.log("updateActor:");
+	//console.log("updateActor:");
+	//assign a random color to mimic patient needs
 	var colors = model.controller.colors;
 	var min = 0;
 	var max = colors.length-1;
@@ -58,8 +59,8 @@ Model.prototype.updateActor = function(actor, model){
 	var a = model.controller.view.stage.get('.'+ actor.id);
 	
 	//need to save location before removing and redrawing
-	//actor.x = a.x;
-	//actor.y = a.y;
+	actor.x = a[0].attrs.x;
+	actor.y = a[0].attrs.y;
 	a.remove();
 	actor.draw();
 	model.controller.view.stage.draw();
@@ -80,11 +81,12 @@ Model.prototype.updateHealthBar = function(v){
 	console.log("New Vitals: " + v.pr + "," +v.rr);
 	//selecting name in Kinetic.js needs a period
 	var healthBar = controller.view.stage.get('.VitalsDisplay');
+	
+     console.log(healthBar);
 	healthBar.remove();
 	this.healthBar.draw();
 	controller.view.stage.draw();
-	
-	//do something to make the layer/group refresh or rebuild it.
+
 	
 }; //end of updateHealthBar
 
@@ -184,6 +186,16 @@ Model.prototype.initVictims = function(){
 	}
 };
 
+Model.prototype.updateActorX = function(actor){
+
+	//getShape
+	//set Actor x = shape.attrs.x
+
+}; //end of updateActorX
+
+Model.prototype.updateActorY = function(actor){
+
+};//end of updateActorY
 
 
 

@@ -31,7 +31,7 @@ Actor.prototype.setID = function(id){
 };
 Actor.prototype.draw = function(pos){
 
-	console.log("Actor.draw");
+	//console.log("Actor.draw");
 	var context = this.controller.view.context;
 	var stage = this.controller.view.stage;
 	var layer = this.controller.view.layer;
