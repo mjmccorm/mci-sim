@@ -2,18 +2,24 @@
 <html>
     <head>
         <style type='text/css'>
-			#myCanvas {
+			#background {
 			position: absolute;
 			top: 0px;
 			left: 0px;
 			border: 1px solid #9C9898;
 			z-index: 1;
+			background-image: url('images/SDC_MAP.jpg');
+			background-repeat: repeat-x;
+			height: 600px;
+			width: 900px;
 			}
 			#container{
 			position: absolute;
 			top: 0px;
 			left: 0px;
+			//opacity:0.4;
 			z-index: 2;
+			
 			}
 
         </style>
@@ -42,6 +48,7 @@
         </script>
     </head>
     <body>
+	<div id="background" width="900" height="600"></div>
 	<div id="container" width="900" height="600"></div>
     </body>
 </html>

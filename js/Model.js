@@ -61,8 +61,12 @@ Model.prototype.updateActor = function(actor, model){
 	//need to save location before removing and redrawing
 	actor.x = a[0].attrs.x;
 	actor.y = a[0].attrs.y;
+	//remove actor listener before removing actor
+	//otherwise browser crashes when trying to click
+	a.off();
 	a.remove();
 	actor.draw();
+	//full reference needed because setInterval doesn't understand 'this'
 	model.controller.view.stage.draw();
 	//actor.draw();
 	//if no treatment || random act of god

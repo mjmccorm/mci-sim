@@ -140,6 +140,7 @@ View.prototype.drawStage = function(){
 
 	if (controller.state == controller.states.PLAYING || controller.state == controller.states.GAMEOVER || controller.state == controller.states.WON) {
 		//mjmccorm moved these so not dependant on state
+		
 		this.drawBackground();
 		this.drawVictims();
 		//this.drawTags();
