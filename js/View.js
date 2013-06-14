@@ -5,12 +5,10 @@
  * and is responsible for the drawing logic
  */
 function View(controller){
-	console.log("View called");
     this.controller = controller;
     this.stage = controller.stage;
     this.layer = controller.layer;
 	this.startLayer = controller.startLayer;
-
 }
 
 View.prototype.drawScreen = function(screenImg){
@@ -20,11 +18,11 @@ View.prototype.drawScreen = function(screenImg){
 		draggable: false
 	});
 	
+	/*
 	group.on('mouseup', function(){
-		console.log(this.getName());
 		this.remove();
 		});
-		
+	*/	
 	var startText = new Kinetic.Text({
         x: 250,
         y: 200,
@@ -55,37 +53,129 @@ View.prototype.drawScreen = function(screenImg){
 		
 };
 
-/*
-View.prototype.drawTags = function() {
-
+View.prototype.drawHealthBar = function(){
 	var controller = this.controller;
-	var model = controller.model;
+    var model = controller.model;
+	var healthBar = model.healthBar;
+	var layer = this.layer;
 	
-	for(var n = 0; n < model.tags.length; n++){
-		var tag = model.tags[n];
-		tag.draw();
-	}
-	
-}; //end of drawTags
-*/
+	//model.healthBar.draw();
+	var group = new Kinetic.Group({
+		draggable: true,
+		name: 'VitalsDisplay'
+	});
+		
+	var bpText = new Kinetic.Text({
+        x: 500,
+        y: 15,
+        text: healthBar.vitalsDisplay.systolic_bp + '/' + healthBar.vitalsDisplay.diastolic_bp,
+        fontSize: 30,
+        fontFamily: 'Calibri',
+        fill: 'green'
+     });
+	 
+	 var bpLabelText = new Kinetic.Text({
+        x: 500,
+        y: 45,
+        text: 'BP (mm Hg)',
+        fontSize: 20,
+        fontFamily: 'Calibri',
+        fill: 'green'
+     });
+	 	
+	var prText = new Kinetic.Text({
+        x: 500,
+        y: 85,
+        text: healthBar.vitalsDisplay.pr,
+        fontSize: 30,
+        fontFamily: 'Calibri',
+        fill: 'green'
+     });
+	 
+	 var prLabelText = new Kinetic.Text({
+        x: 500,
+        y: 115,
+        text: 'HR (bpm)',
+        fontSize: 20,
+        fontFamily: 'Calibri',
+        fill: 'green'
+     });
+	 
+	 var osatText = new Kinetic.Text({
+        x: 500,
+        y: 155,
+        text: healthBar.vitalsDisplay.osat + '%',
+        fontSize: 30,
+        fontFamily: 'Calibri',
+        fill: 'green'
+     });
+	 
+	 var osatLabelText = new Kinetic.Text({
+        x: 500,
+        y: 185,
+        text: 'Sp02',
+        fontSize: 20,
+        fontFamily: 'Calibri',
+        fill: 'green'
+     });
+	 
+	 var etco2Text = new Kinetic.Text({
+        x: 600,
+        y: 155,
+        text: healthBar.vitalsDisplay.etco2 + '',
+        fontSize: 30,
+        fontFamily: 'Calibri',
+        fill: 'green'
+     });
+	 
+	 var etco2LabelText = new Kinetic.Text({
+        x: 600,
+        y: 185,
+        text: 'EtCO2',
+        fontSize: 20,
+        fontFamily: 'Calibri',
+        fill: 'green'
+     });	 
+	 
+	 var monitorBackground = new Kinetic.Rect({
+		x: 490,
+		y: 10,
+		fill: '#000',
+		width: 200,
+		height: 200,
+		shadowColor: '#000',
+		shadowBlur: 10,
+		shadowOffset: [10,10],
+		shadowOpacity: 0.2,
+		cornerRadius: 10
+		});
+	 
+	 group.add(monitorBackground);
+	 group.add(bpText);
+	 group.add(bpLabelText);
+	 group.add(prText);
+	 group.add(prLabelText);
+	 group.add(osatText);
+	 group.add(osatLabelText);
+	 group.add(etco2Text);
+	 group.add(etco2LabelText);
+	 layer.add(group);
+	 
+};//end of drawHealthBar
 
 View.prototype.drawVictims = function() {
-    console.log('View.drawVictims called');
+	console.log("drawVictims");
     var controller = this.controller;
+	var view = controller.view;
     var model = controller.model;
+	var stage = this.stage;
 	for (var n = 0; n < model.victims.length; n++) {
 	    var victim = model.victims[n];
-		var offsetPos = {
-			x: victim.x,
-			y: victim.y
-		};
-	    victim.draw(offsetPos);
+	    victim.draw();
 	}
 };
 
 View.prototype.drawBackground = function(){
-	console.log("View.drawBackground");
-	
 	var layer = this.layer;
 	var stage = this.stage;
 	
@@ -129,23 +219,25 @@ View.prototype.drawBackground = function(){
 	layer.add(redTarp);
 	layer.add(yellowTarp);
 	layer.add(greenTarp);
-	stage.draw();
+	//stage.draw();
 		
 };//end of drawBackground
 
 View.prototype.drawStage = function(){
-    console.log("View.drawStage called");
+
     var controller = this.controller;
     var model = controller.model;
-
+	var stage = this.stage;
+	
 	if (controller.state == controller.states.PLAYING || controller.state == controller.states.GAMEOVER || controller.state == controller.states.WON) {
 		//mjmccorm moved these so not dependant on state
-		
 		this.drawBackground();
 		this.drawVictims();
+		this.drawHealthBar();
 		//this.drawTags();
-		model.healthBar.draw();
-		
+		//model.healthBar.draw();
+		controller.addVictimListeners();
+		stage.draw();
 		
 	} else if (controller.state == controller.states.READY) {
 		//display start message

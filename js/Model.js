@@ -5,7 +5,6 @@
  * updating the hero, level, bad guys, and health bar
  */
 function Model(controller){
-    console.log("Model called");
     this.controller = controller;
     this.healthBar = null;
     this.victims = []; // array of victims
@@ -14,7 +13,6 @@ function Model(controller){
 }
 
 Model.prototype.initHealthBar = function(){
-    console.log("initHealthBar called");
     this.healthBar = new HealthBar({
         controller: this.controller,
         x: 10,
@@ -30,6 +28,13 @@ Model.prototype.initHealthBar = function(){
 			})
     });
 };
+
+Model.prototype.updateHealthBar = function(v){
+
+	var controller = this.controller;
+	this.healthBar.setVitalsDisplay(v);
+
+}; //end of updateHealthBar
 
 /*
 Model.prototype.updateStage() = function() {
@@ -48,8 +53,8 @@ Model.prototype.updateStage() = function() {
 */
 
 Model.prototype.updateActor = function(actor, model){
-
-	//console.log("updateActor:");
+	console.log(actor);
+	console.log(model);
 	//assign a random color to mimic patient needs
 	var colors = model.controller.colors;
 	var min = 0;
@@ -68,34 +73,17 @@ Model.prototype.updateActor = function(actor, model){
 	actor.draw();
 	//full reference needed because setInterval doesn't understand 'this'
 	model.controller.view.stage.draw();
-	//actor.draw();
 	//if no treatment || random act of god
 	//   deteriorate patient
 	//else
 	//   maintain patient vitals || return to normal
-
 }; //end of updateActor
 
 
 
-Model.prototype.updateHealthBar = function(v){
-	console.log('updateHealthBar');
-	var controller = this.controller;
-	this.healthBar.setVitalsDisplay(v);
-	console.log("New Vitals: " + v.pr + "," +v.rr);
-	//selecting name in Kinetic.js needs a period
-	var healthBar = controller.view.stage.get('.VitalsDisplay');
-	
-     console.log(healthBar);
-	healthBar.remove();
-	this.healthBar.draw();
-	controller.view.stage.draw();
 
-	
-}; //end of updateHealthBar
 
 Model.prototype.addTag = function(){
-
 	nextTagId = this.tags.length;
 	console.log("creating tag " + nextTagId);
 	this.tags.push(new Tag({
@@ -104,13 +92,10 @@ Model.prototype.addTag = function(){
 		x: 10 + this.tags.length*5,
 		y: 10 + this.tags.length*5
 		}));
-
 	return nextTagId;
 };//end of addTag
 
 Model.prototype.initVictims = function(){
-	console.log("initVictims called");
-
 	//need to randomly create victims with
 	//various trauma injuries, ages, and vitals
 	var victimStartConfig = [{
@@ -174,16 +159,13 @@ Model.prototype.initVictims = function(){
 
 		//Each victim should get a timer
 		//http://dev.w3.org/html5/spec-LC/timers.html
-		
 		var model = this;
-		var min = 1000;
+		var min = 2000;
 		var max = 10000;
 		var time = Math.floor(Math.random() * (max - min + 1)) + min;
-		var timer = window.setInterval(this.updateActor, time, person, model);
-		this.timers.push(timer);
-
-
-     		this.victims.push(person);
+		//var timer = window.setInterval(model.updateActor, time, person, model);
+		//this.timers.push(timer);
+		this.victims.push(person);
 
 		
 

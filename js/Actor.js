@@ -5,7 +5,6 @@
  */
 function Actor(config){
 
-	console.log("Actor defined");
 	this.controller = config.controller;
 	this.x = config.x;
 	this.y = config.y;
@@ -16,7 +15,7 @@ function Actor(config){
 	this.age = config.age;
 	this.gender = config.gender;
 	this.abc = config.abc; //airway, breathing, circulation
-	this.sample = config.sample; //signs & symptoms, allergies, medications, etc.
+	this.ample = config.ample; //signs & symptoms, allergies, medications, etc.
 }
 
 Actor.prototype.damage = function(){
@@ -29,9 +28,7 @@ Actor.prototype.setID = function(id){
 
 		this.id = id;
 };
-Actor.prototype.draw = function(pos){
-
-	//console.log("Actor.draw");
+Actor.prototype.draw = function(){
 	var context = this.controller.view.context;
 	var stage = this.controller.view.stage;
 	var layer = this.controller.view.layer;
@@ -48,32 +45,8 @@ Actor.prototype.draw = function(pos){
         draggable: true,
 		name: this.id
       });
-
-	var id = this.id;
-	var vitals = this.current_vitals;
-	var age = this.age;
-	var gender = this.gender;
-	var abc = this.abc;
-	var sample = this.sample;
-	
-	box.on('mouseup', function(){
-		
-		console.log("Updating vitals with "+ vitals.pr + "," + vitals.rr);
-		model.updateHealthBar(vitals);
-		console.log("ID:" + id);
-		console.log("BP:" + vitals.systolic_bp + "/" + vitals.diastolic_bp);
-		console.log("RR:" + vitals.rr);
-		console.log("PR:" + vitals.pr);
-		console.log("SpO2:" + vitals.osat);
-		console.log("EtCO2:" + vitals.etco2);
-		console.log("Age:" + age);
-		console.log("Gender:" + gender);
-		console.log("ABC:" + abc);
-		console.log("SAMPLE:" + sample);
-		
-		
-	});
+	  
 	layer.add(box);
 	stage.add(layer);
-
+	console.log("added " + box.attrs.name);
 };
