@@ -38,28 +38,6 @@ function Controller(canvasId){
 
 };
 
-Controller.prototype.addVictimListeners = function(){
-	console.log("addVictimListeners");
-	var that = this;
-	var model = this.model;
-	var view = this.view;
-	var stage = view.stage;
-	var victims = model.victims;
-	var healthBar = stage.get('.VitalsDisplay');
-	
-	for(var i=0; i < victims.length; i++){
-		var victim = victims[i];
-		console.log('.' + victims[i].id);
-		var box = stage.get('.' + victims[i].id);
-		box.on('mouseup', function(){
-			console.log('clicked:' + box[0].attrs.name);
-			model.updateHealthBar(victim.current_vitals);
-			healthBar.remove();
-			view.drawHealthBar();
-			stage.draw();
-		});
-	}
-}
 
 Controller.prototype.loadImages = function(){
 	
@@ -102,7 +80,7 @@ Controller.prototype.handleKeydown = function(evt){
 		
 		case this.keys.A:  //A
 			var tag_id = this.model.addTag();
-			this.model.tags[tag_id].draw();			
+			this.model.tags[tag_id].draw();		
 		    this.stage.draw();
 			break;
     }

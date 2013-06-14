@@ -85,7 +85,6 @@ Model.prototype.updateActor = function(actor, model){
 
 Model.prototype.addTag = function(){
 	nextTagId = this.tags.length;
-	console.log("creating tag " + nextTagId);
 	this.tags.push(new Tag({
 		id: nextTagId,
 		controller: this.controller,

@@ -28,9 +28,12 @@ Actor.prototype.setID = function(id){
 
 		this.id = id;
 };
+
 Actor.prototype.draw = function(){
+	var that = this;
 	var context = this.controller.view.context;
 	var stage = this.controller.view.stage;
+	var view = this.controller.view;
 	var layer = this.controller.view.layer;
 	var model = this.controller.model;
 
@@ -43,10 +46,20 @@ Actor.prototype.draw = function(){
         stroke: 'black',
         strokeWidth: 4,
         draggable: true,
-		name: this.id
+	   name: this.id,
+	   type: 'person'
       });
 	  
 	layer.add(box);
 	stage.add(layer);
 	console.log("added " + box.attrs.name);
+
+	box.on('mouseup', function(){
+		var healthBar = stage.get('.VitalsDisplay');
+		model.updateHealthBar(that.current_vitals);
+		healthBar.remove();
+		view.drawHealthBar();
+		stage.draw();
+	});
+
 };

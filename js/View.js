@@ -66,7 +66,7 @@ View.prototype.drawHealthBar = function(){
 	});
 		
 	var bpText = new Kinetic.Text({
-        x: 500,
+        x: 10,
         y: 15,
         text: healthBar.vitalsDisplay.systolic_bp + '/' + healthBar.vitalsDisplay.diastolic_bp,
         fontSize: 30,
@@ -75,7 +75,7 @@ View.prototype.drawHealthBar = function(){
      });
 	 
 	 var bpLabelText = new Kinetic.Text({
-        x: 500,
+        x: 10,
         y: 45,
         text: 'BP (mm Hg)',
         fontSize: 20,
@@ -84,7 +84,7 @@ View.prototype.drawHealthBar = function(){
      });
 	 	
 	var prText = new Kinetic.Text({
-        x: 500,
+        x: 10,
         y: 85,
         text: healthBar.vitalsDisplay.pr,
         fontSize: 30,
@@ -93,7 +93,7 @@ View.prototype.drawHealthBar = function(){
      });
 	 
 	 var prLabelText = new Kinetic.Text({
-        x: 500,
+        x: 10,
         y: 115,
         text: 'HR (bpm)',
         fontSize: 20,
@@ -102,7 +102,7 @@ View.prototype.drawHealthBar = function(){
      });
 	 
 	 var osatText = new Kinetic.Text({
-        x: 500,
+        x: 10,
         y: 155,
         text: healthBar.vitalsDisplay.osat + '%',
         fontSize: 30,
@@ -111,7 +111,7 @@ View.prototype.drawHealthBar = function(){
      });
 	 
 	 var osatLabelText = new Kinetic.Text({
-        x: 500,
+        x: 10,
         y: 185,
         text: 'Sp02',
         fontSize: 20,
@@ -120,7 +120,7 @@ View.prototype.drawHealthBar = function(){
      });
 	 
 	 var etco2Text = new Kinetic.Text({
-        x: 600,
+        x: 10,
         y: 155,
         text: healthBar.vitalsDisplay.etco2 + '',
         fontSize: 30,
@@ -129,7 +129,7 @@ View.prototype.drawHealthBar = function(){
      });
 	 
 	 var etco2LabelText = new Kinetic.Text({
-        x: 600,
+        x: 10,
         y: 185,
         text: 'EtCO2',
         fontSize: 20,
@@ -138,7 +138,7 @@ View.prototype.drawHealthBar = function(){
      });	 
 	 
 	 var monitorBackground = new Kinetic.Rect({
-		x: 490,
+		x: 0,
 		y: 10,
 		fill: '#000',
 		width: 200,
@@ -234,9 +234,6 @@ View.prototype.drawStage = function(){
 		this.drawBackground();
 		this.drawVictims();
 		this.drawHealthBar();
-		//this.drawTags();
-		//model.healthBar.draw();
-		controller.addVictimListeners();
 		stage.draw();
 		
 	} else if (controller.state == controller.states.READY) {

@@ -12,7 +12,7 @@ function Tag(config){
 }//end of Vitals
 
 Tag.prototype.draw = function(){
-	
+	console.log('tag ' + this.id);
 	var layer = this.controller.view.layer;
 	var stage = this.controller.view.stage;
 	
@@ -20,7 +20,8 @@ Tag.prototype.draw = function(){
 	id: this.id,
 	x: this.x,
 	y: this.y,
-	draggable: true
+	draggable: true,
+	type: 'tag'
 	});
 
 	var box = new Kinetic.Rect({
