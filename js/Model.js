@@ -64,11 +64,11 @@ Model.prototype.updateActor = function(actor){
 	var a = model.controller.view.stage.get('.'+ actor.id);
 	
 	//need to save location before removing and redrawing
-	actor.x = a[0].attrs.x;
-	actor.y = a[0].attrs.y;
+	actor.x += a.getX();
+	actor.y += a.getY();
 	//remove actor listener before removing actor
 	//otherwise browser crashes when trying to click
-	a.off();
+	//a.off();
 	a.remove();
 	actor.draw();
 	//full reference needed because setInterval doesn't understand 'this'
@@ -114,7 +114,8 @@ Model.prototype.initVictims = function(){
 		id: 'p0',
 		gender: 'Male',
 		abc: 'air way open, unequal chest rise',
-		sample: 'deformity on head, no allergies, no med history'
+		sample: 'deformity on head, no allergies, no med history',
+		weight: 65
 	},{
 		x: 150,
 		y: 150,
@@ -132,7 +133,8 @@ Model.prototype.initVictims = function(){
 		id: 'p1',
 		gender: 'Female',
 		abc: 'not breathing, approximately 2L blood loss',
-		sample: 'open femur fracture, unknown allergies'
+		sample: 'open femur fracture, unknown allergies',
+		weight: 80
 	}];
 
 	for (var n = 0; n < victimStartConfig.length; n++) {

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style type="text/css">
+.builder div {
+  position: absolute;
+  display: block;
+  width: 100px;
+  height: 100px;
+  z-index: 100;
+  margin-left: 900px;
+  background-repeat: no-repeat;
+}
+.builder #preview div a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+#head {
+  margin-left: 910px;
+  margin-top: 5px;
+  z-index: 200;
+}
+#armR {
+  margin-left: 750px;
+  margin-top: 100px;
+}
+#armL {
+  margin-left: 990px;
+  margin-top: 100px;
+}
+#torso {
+  margin-left: 850px;
+  margin-top: 93px;
+}
+#pelvis {
+  margin-left: 863px;
+  margin-top: 267px;
+  z-index: 150;
+}
+#legR {
+  margin-left: 805px;
+  margin-top: 370px;
+}
+#legL {
+  margin-left: 960px;
+  margin-top: 370px;
+}
+
+</style>
+<script type="text/javascript" src="js/jquery-latest.js"></script>
+<script type="text/javascript">
+
+var bodyParts = [
+	'head',
+	'armR',
+	'armL',
+	'torso',
+	'pelvis',
+	'legR',
+	'legL'
+];
+	
+var injuries = [
+	{
+	name: 'amputation',
+	color: 'rgb(255,255,255)'
+	},
+	{
+	name: 'contusion',
+	color: 'rgb(166, 27,73)'
+	},
+	{
+	name: 'contusion',
+	color: 'rgb(26, 19, 171)'
+	}
+	
+];
+	
+function getRandomBodyPart(){
+
+	var min = 0;
+	var max = bodyParts.length - 1;
+	var index = Math.floor(Math.random() * (max - min + 1)) + min;
+	
+	return bodyParts[index];
+	
+}//end of getRandomPart
+
+function getRandomInjury(){
+
+	var min = 0;
+	var max = injuries.length - 1;
+	var index = Math.floor(Math.random() * (max - min + 1)) + min;
+	
+	return injuries[index];
+	
+}//end of getRandomPart
+
+function getRandomColor(){
+
+	var greys = [0, 105, 128, 169, 192, 211, 220]
+	var min = 0;
+	var max = greys.length-1;
+	var index = Math.floor(Math.random() * (max - min + 1)) + min;
+
+	var hue = 'rgb(' + greys[index] + ',' + greys[index] + ',' + greys[index] + ')';
+	//var hue = 'rgb(' + (Math.floor((256-199)*Math.random()) + 200) + ',' + (Math.floor((256-199)*Math.random()) + 200) + ',' + (Math.floor((256-199)*Math.random()) + 200) + ')';
+	//return 'rgb(128,128,128)';
+	return hue;
+}
+
+function init(){
+
+	$('#head').css("background-color", getRandomColor());
+	$('#armR').css("background-color", getRandomColor());
+	$('#armL').css("background-color", getRandomColor());
+	$('#torso').css("background-color", getRandomColor());
+	$('#pelvis').css("background-color", getRandomColor());
+	$('#legR').css("background-color", getRandomColor());
+	$('#legL').css("background-color", getRandomColor());
+}	
+
+$(document).ready(function() {
+	// Handler for .ready() called.
+	init();
+	
+	
+	var selectedPart = getRandomBodyPart();
+	var selectedInjury = getRandomInjury();
+	var hue = selectedInjury.color;
+	//var hue = getRandomColor();
+	$('#' + selectedPart).css("background-color", hue);
+	console.log(selectedPart);
+	console.log(selectedInjury.name);
+	
+	
+	
+});
+
+</script>
+</head>
+	
+<body>
+
+<!--
+<div id="builderContainer" class="builder">			
+	<div id="preview">
+		<div style="background-image: url(&quot;images/builder/healthy-head.png?1371319320.756&quot;); height: 121px; width: 72px;" class="head"><a href="/images/builder/previews/head-basic.jpg" rel="lightbox[head]"></a></div>
+		<div style="background-image: url(&quot;images/builder/right-arm-healthy.png?1371319320.756&quot;); height: 198px; width: 147px;" class="armR"><a href="/images/builder/previews/arm-amputated-1.jpg" rel="lightbox[arm]"></a></div>
+		<div style="background-image: url(&quot;images/builder/left-arm-healthy.png?1371319320.756&quot;); height: 196px; width: 181px;" class="armL"><a href="/images/builder/previews/arm-amputated-1.jpg" rel="lightbox[arm]"></a></div>
+		<div style="background-image: url(&quot;images/builder/torso-healthy.png?1371319320.756&quot;); height: 231px; width: 189px;" class="torso"><a href="/images/builder/previews/torso-basic.jpg" rel="lightbox[torso]"></a></div>
+		<div style="background-image: url(&quot;images/builder/pants.png?1371319320.756&quot;); height: 157px; width: 171px;" class="pelvis"><a href="/images/builder/previews/pelvis-gsw.jpg" rel="lightbox[pelvis]"></a></div>
+		<div style="background-image: url(&quot;images/builder/right-leg-healthy.png?1371319320.756&quot;); height: 287px; width: 127px;" class="legR"><a href="/images/builder/previews/leg-gsw-1.jpg" alt="" rel="lightbox[leg]"></a></div>
+		<div style="background-image: url(&quot;images/builder/left-leg-healthy.png?1371319320.756&quot;); height: 280px; width: 144px; " class="legL"><a href="/images/builder/previews/leg-gsw-1.jpg" alt="" rel="lightbox[leg]"></a></div>
+	</div>
+</div>
+-->
+
+<div id="data"></div>
+
+<div id="preview" class="builder">
+	<div style="height: 121px; width: 72px;" id="head"></div>
+	<div style="height: 198px; width: 147px;" id="armR"></div>
+	<div style="height: 196px; width: 181px;" id="armL"></div>
+	<div style="height: 231px; width: 189px;" id="torso"></div>
+	<div style="height: 157px; width: 171px;" id="pelvis"></div>
+	<div style="height: 287px; width: 127px;" id="legR"></div>
+	<div style="height: 280px; width: 144px; " id="legL"></div>
+</div>
+		
+</body>
+</html>				

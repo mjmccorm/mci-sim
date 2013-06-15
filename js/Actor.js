@@ -16,6 +16,7 @@ function Actor(config){
 	this.gender = config.gender;
 	this.abc = config.abc; //airway, breathing, circulation
 	this.ample = config.ample; //signs & symptoms, allergies, medications, etc.
+	this.weight = config.weight;  //kilograms
 }
 
 Actor.prototype.damage = function(){
