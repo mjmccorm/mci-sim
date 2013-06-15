@@ -54,8 +54,8 @@ Actor.prototype.draw = function(){
 	stage.add(layer);
 	console.log("added " + box.attrs.name);
 
-	box.on('mouseup', function(){
-		var healthBar = stage.get('.VitalsDisplay');
+	box.on('dblclick', function(){
+		var healthBar = stage.get('#VitalsDisplay');
 		model.updateHealthBar(that.current_vitals);
 		healthBar.remove();
 		view.drawHealthBar();

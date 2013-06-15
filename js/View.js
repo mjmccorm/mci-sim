@@ -62,84 +62,12 @@ View.prototype.drawHealthBar = function(){
 	//model.healthBar.draw();
 	var group = new Kinetic.Group({
 		draggable: true,
-		name: 'VitalsDisplay'
+		id: 'VitalsDisplay'
 	});
 		
-	var bpText = new Kinetic.Text({
-        x: 10,
-        y: 15,
-        text: healthBar.vitalsDisplay.systolic_bp + '/' + healthBar.vitalsDisplay.diastolic_bp,
-        fontSize: 30,
-        fontFamily: 'Calibri',
-        fill: 'green'
-     });
-	 
-	 var bpLabelText = new Kinetic.Text({
-        x: 10,
-        y: 45,
-        text: 'BP (mm Hg)',
-        fontSize: 20,
-        fontFamily: 'Calibri',
-        fill: 'green'
-     });
-	 	
-	var prText = new Kinetic.Text({
-        x: 10,
-        y: 85,
-        text: healthBar.vitalsDisplay.pr,
-        fontSize: 30,
-        fontFamily: 'Calibri',
-        fill: 'green'
-     });
-	 
-	 var prLabelText = new Kinetic.Text({
-        x: 10,
-        y: 115,
-        text: 'HR (bpm)',
-        fontSize: 20,
-        fontFamily: 'Calibri',
-        fill: 'green'
-     });
-	 
-	 var osatText = new Kinetic.Text({
-        x: 10,
-        y: 155,
-        text: healthBar.vitalsDisplay.osat + '%',
-        fontSize: 30,
-        fontFamily: 'Calibri',
-        fill: 'green'
-     });
-	 
-	 var osatLabelText = new Kinetic.Text({
-        x: 10,
-        y: 185,
-        text: 'Sp02',
-        fontSize: 20,
-        fontFamily: 'Calibri',
-        fill: 'green'
-     });
-	 
-	 var etco2Text = new Kinetic.Text({
-        x: 10,
-        y: 155,
-        text: healthBar.vitalsDisplay.etco2 + '',
-        fontSize: 30,
-        fontFamily: 'Calibri',
-        fill: 'green'
-     });
-	 
-	 var etco2LabelText = new Kinetic.Text({
-        x: 10,
-        y: 185,
-        text: 'EtCO2',
-        fontSize: 20,
-        fontFamily: 'Calibri',
-        fill: 'green'
-     });	 
-	 
-	 var monitorBackground = new Kinetic.Rect({
-		x: 0,
-		y: 10,
+	var monitorBackground = new Kinetic.Rect({
+		x: healthBar.x,
+		y: healthBar.y,
 		fill: '#000',
 		width: 200,
 		height: 200,
@@ -147,19 +75,112 @@ View.prototype.drawHealthBar = function(){
 		shadowBlur: 10,
 		shadowOffset: [10,10],
 		shadowOpacity: 0.2,
-		cornerRadius: 10
-		});
+		cornerRadius: 10,
+		id: 'monitorBackground'
+	});
+		
+	var bpText = new Kinetic.Text({
+        x: healthBar.x + 10,
+        y: healthBar.y + 10,
+        text: healthBar.vitalsDisplay.systolic_bp + '/' + healthBar.vitalsDisplay.diastolic_bp,
+        fontSize: 30,
+        fontFamily: 'Calibri',
+        fill: 'green',
+		id: 'bpText'
+     });
 	 
-	 group.add(monitorBackground);
-	 group.add(bpText);
-	 group.add(bpLabelText);
-	 group.add(prText);
-	 group.add(prLabelText);
-	 group.add(osatText);
-	 group.add(osatLabelText);
-	 group.add(etco2Text);
-	 group.add(etco2LabelText);
-	 layer.add(group);
+	var bpLabelText = new Kinetic.Text({
+		x: healthBar.x,
+		y: healthBar.y + 45,
+		text: 'BP (mm Hg)',
+		fontSize: 20,
+		fontFamily: 'Calibri',
+		fill: 'green',
+		id: 'bpLabelText'
+	});
+
+	var prText = new Kinetic.Text({
+        x: healthBar.x,
+        y: healthBar.y + 85,
+        text: healthBar.vitalsDisplay.pr,
+        fontSize: 30,
+        fontFamily: 'Calibri',
+        fill: 'green',
+		id: 'prText'
+     });
+	 
+	var prLabelText = new Kinetic.Text({
+		x: healthBar.x,
+		y: healthBar.y + 130,
+		text: 'HR (bpm)',
+		fontSize: 20,
+		fontFamily: 'Calibri',
+		fill: 'green',
+		id: 'prLabelText'
+	});
+	 
+	var osatText = new Kinetic.Text({
+		x: healthBar.x + 10,
+		y: healthBar.y + 150,
+		text: healthBar.vitalsDisplay.osat + '%',
+		fontSize: 30,
+		fontFamily: 'Calibri',
+		fill: 'green',
+		id: 'osaText'
+	});
+	 
+	var osatLabelText = new Kinetic.Text({
+		x: healthBar.x + 10,
+		y: healthBar.y + 180,
+		text: 'Sp02',
+		fontSize: 20,
+		fontFamily: 'Calibri',
+		fill: 'green',
+		id: 'osaLabelText'
+	});
+	 
+	var etco2Text = new Kinetic.Text({
+		x: healthBar.x + 80,
+		y: healthBar.y + 150,
+		text: healthBar.vitalsDisplay.etco2 + '',
+		fontSize: 30,
+		fontFamily: 'Calibri',
+		fill: 'green',
+		id: 'etco2Text'
+	});
+	 
+	var etco2LabelText = new Kinetic.Text({
+		x: healthBar.x + 80,
+		y: healthBar.y + 180,
+		text: 'EtCO2',
+		fontSize: 20,
+		fontFamily: 'Calibri',
+		fill: 'green',
+		id: 'etco2LabelText'
+	});	 
+	
+	group.on('dragstart', function(){
+	
+	});
+	group.on('dragend', function(e){
+		
+		healthBar.x += this.getX();
+		healthBar.y += this.getY();
+	});
+	group.on('dblclick', function(){
+		
+	});
+
+	group.add(monitorBackground);
+	group.add(bpText);
+	group.add(bpLabelText);
+	group.add(prText);
+	group.add(prLabelText);
+	group.add(osatText);
+	group.add(osatLabelText);
+	group.add(etco2Text);
+	group.add(etco2LabelText);
+	layer.add(group);
 	 
 };//end of drawHealthBar
 
@@ -173,7 +194,7 @@ View.prototype.drawVictims = function() {
 	    var victim = model.victims[n];
 	    victim.draw();
 	}
-};
+}; //end of drawVictims
 
 View.prototype.drawBackground = function(){
 	var layer = this.layer;

@@ -16,7 +16,7 @@ Model.prototype.initHealthBar = function(){
     this.healthBar = new HealthBar({
         controller: this.controller,
         x: 10,
-        y: 10,
+        y: 300,
 		vitalsDisplay: new Vitals({
 			systolic_bp: 0,
 			diastolic_bp: 0,
@@ -31,7 +31,6 @@ Model.prototype.initHealthBar = function(){
 
 Model.prototype.updateHealthBar = function(v){
 
-	var controller = this.controller;
 	this.healthBar.setVitalsDisplay(v);
 
 }; //end of updateHealthBar
@@ -52,9 +51,10 @@ Model.prototype.updateStage() = function() {
 }; //end of updateStage
 */
 
-Model.prototype.updateActor = function(actor, model){
+Model.prototype.updateActor = function(actor){
 	console.log(actor);
 	console.log(model);
+	var model = this;
 	//assign a random color to mimic patient needs
 	var colors = model.controller.colors;
 	var min = 0;

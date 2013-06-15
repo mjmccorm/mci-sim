@@ -26,7 +26,8 @@ function Controller(canvasId){
 	this.stage = new Kinetic.Stage({
 		container: 'container',
 		width: 900,
-		height: 600
+		height: 600,
+		draggable: false
 	});
 	this.layer = new Kinetic.Layer();
 	this.startLayer = new Kinetic.Layer();
