@@ -63,16 +63,52 @@ var bodyParts = [
 	
 var injuries = [
 	{
+	name: 'healthy',
+	color: 'rgb(166, 27,73)',
+		bodyParts: {
+		head: 'images/builder/healthy-head.png',
+		armR: 'images/builder/right-arm-healthy.png',
+		armL: 'images/builder/left-arm-healthy.png',
+		torso: 'images/builder/torso-healthy.png',
+		pelvis: 'images/builder/pants.png',
+		legR: 'images/builder/right-leg-healthy.png',
+		legL: 'images/builder/left-leg-healthy.png'
+		},
+	},
+	{
 	name: 'amputation',
-	color: 'rgb(255,255,255)'
+	color: 'rgb(255,255,255)',
+	bodyParts: {
+		head: 'images/builder/healthy-head.png',
+		armL: 'images/builder/left-arm-amputation.png',
+		torso: 'images/builder/healthy-head.png',
+		pelvis: 'images/builder/healthy-head.png',
+		legR: 'images/builder/right-leg-amputation.png',
+		legL: 'images/builder/left-leg-amputation.png'
+		},
 	},
 	{
 	name: 'contusion',
-	color: 'rgb(166, 27,73)'
+	color: 'rgb(166, 27,73)',
+		bodyParts: {
+		head: 'images/builder/healthy-head.png',
+		armR: 'images/builder/right-arm-healthy.png',
+		armL: 'images/builder/left-arm-healthy.png',
+		torso: 'images/builder/torso-healthy.png',
+		pelvis: 'images/builder/pants.png',
+		legR: 'images/builder/right-leg-healthy.png',
+		legL: 'images/builder/left-leg-healthy.png'
+		},
 	},
 	{
-	name: 'contusion',
-	color: 'rgb(26, 19, 171)'
+	name: 'blast',
+	color: 'rgb(26, 19, 171)',
+		color: 'rgb(166, 27,73)',
+		bodyParts: {
+		head: 'images/builder/blast-head.png',
+		armR: 'images/builder/right-arm-shrapnel.png',
+		armL: 'images/builder/left-arm-blast.png'
+		},
 	}
 	
 ];
@@ -87,6 +123,34 @@ function getRandomBodyPart(){
 	
 }//end of getRandomPart
 
+function getRandomInjuredPart(injury){
+
+	var parts = injury.bodyParts;
+	var partsNames = [];
+	var partsImages = [];
+	
+	/*  figure out how many properties/attributes are in parts object */
+	
+	for (var key in parts) {
+		if (parts.hasOwnProperty(key)) {
+			partsNames.push(key);
+			partsImages.push(parts[key]);
+		}
+	};
+
+	/* pick a random injured body part */
+	var min = 0;
+	var max = partsNames.length - 1;
+	var index = Math.floor(Math.random() * (max - min + 1)) + min;
+	
+	var obj = {
+		name: partsNames[index],
+		imgSrc: partsImages[index]
+		};
+		
+	return obj;
+
+}//end of getRandomInjuredPart
 function getRandomInjury(){
 
 	var min = 0;
@@ -119,19 +183,32 @@ function init(){
 	$('#pelvis').css("background-color", getRandomColor());
 	$('#legR').css("background-color", getRandomColor());
 	$('#legL').css("background-color", getRandomColor());
+	
+	$('#head').css("background-image", 'url(images/builder/healthy-head.png)');
+	$('#armR').css("background-image", 'url(images/builder/right-arm-healthy.png)');
+	$('#armL').css("background-image", 'url(images/builder/left-arm-healthy.png)');
+	$('#torso').css("background-image",'url(images/builder/torso-healthy.png)');
+	$('#pelvis').css("background-image",'url(images/builder/pants.png)');
+	$('#legR').css("background-image", 'url(images/builder/right-leg-healthy.png)');
+	$('#legL').css("background-image", 'url(images/builder/left-leg-healthy.png)');
 }	
 
 $(document).ready(function() {
-	// Handler for .ready() called.
+
 	init();
-	
-	
-	var selectedPart = getRandomBodyPart();
 	var selectedInjury = getRandomInjury();
+	var selectedPart = getRandomBodyPart();// to be removed
+	
+	console.log("Selected:" + selectedInjury.name);
+	var selectedInjuredPart = getRandomInjuredPart(selectedInjury);
+
+	console.log('selectedInjuredPart:' + selectedInjuredPart.name);
+	console.log('selectedInjuredPart:' + selectedInjuredPart.imgSrc);
 	var hue = selectedInjury.color;
 	//var hue = getRandomColor();
 	$('#' + selectedPart).css("background-color", hue);
-	console.log(selectedPart);
+	$('#' + selectedInjuredPart.name).css("background-image", 'url(' + selectedInjuredPart.imgSrc + ')');
+	
 	console.log(selectedInjury.name);
 	
 	
