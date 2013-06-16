@@ -61,6 +61,21 @@ Actor.prototype.draw = function(){
 		healthBar.remove();
 		view.drawHealthBar();
 		stage.draw();
+		
+		model.initInjury();
+		
+		var selectedInjury = getRandomInjury();
+		console.log("Selected:" + selectedInjury.name);
+		var selectedInjuredPart = getRandomInjuredPart(selectedInjury);
+
+		console.log('selectedInjuredPart:' + selectedInjuredPart.name);
+		console.log('selectedInjuredPart:' + selectedInjuredPart.imgSrc);
+		//var hue = selectedInjury.color;
+		//var hue = getRandomColor();
+		//$('#' + selectedPart).css("background-color", hue);
+		$('#' + selectedInjuredPart.name).css("background-image", 'url(' + selectedInjuredPart.imgSrc + ')');
+		console.log(selectedInjury.name);
+
 	});
 
 };

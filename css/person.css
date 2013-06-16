@@ -1,4 +1,4 @@
-.builder #preview div {
+.builder div {
   position: absolute;
   display: block;
   width: 100px;
@@ -12,33 +12,33 @@
   width: 100%;
   height: 100%;
 }
-.builder #preview .head {
+#head {
   margin-left: 910px;
   margin-top: 5px;
   z-index: 200;
 }
-.builder #preview .armR {
+#armR {
   margin-left: 750px;
   margin-top: 100px;
 }
-.builder #preview .armL {
+#armL {
   margin-left: 990px;
   margin-top: 100px;
 }
-.builder #preview .torso {
+#torso {
   margin-left: 850px;
   margin-top: 93px;
 }
-.builder #preview .pelvis {
+#pelvis {
   margin-left: 863px;
   margin-top: 267px;
   z-index: 150;
 }
-.builder #preview .legR {
+#legR {
   margin-left: 805px;
   margin-top: 370px;
 }
-.builder #preview .legL {
+#legL {
   margin-left: 960px;
   margin-top: 370px;
 }

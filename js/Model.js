@@ -35,22 +35,6 @@ Model.prototype.updateHealthBar = function(v){
 
 }; //end of updateHealthBar
 
-/*
-Model.prototype.updateStage() = function() {
-
-    	var controller = this.controller;
-    	var canvas = controller.view.canvas;
-    	if (controller.state == controller.states.PLAYING) {
-
-	
-		//this.healthBar.setHealth();
-		//this.updateActor(this.selectedVictim);
-
-	}
-
-}; //end of updateStage
-*/
-
 Model.prototype.updateActor = function(actor){
 	console.log(actor);
 	console.log(model);
@@ -79,9 +63,16 @@ Model.prototype.updateActor = function(actor){
 	//   maintain patient vitals || return to normal
 }; //end of updateActor
 
+Model.prototype.initTags = function(){
 
-
-
+	var maxVictims = this.victims.length + 5;
+	for(var i=0; i<maxVictims; i++){
+		this.addTag();
+	}
+	for(var i=0; i<this.tags.length; i++){
+		this.tags[i].draw();
+	}
+} //end of initTags
 
 Model.prototype.addTag = function(){
 	nextTagId = this.tags.length;
@@ -98,8 +89,8 @@ Model.prototype.initVictims = function(){
 	//need to randomly create victims with
 	//various trauma injuries, ages, and vitals
 	var victimStartConfig = [{
-		x: 50,
-		y: 50,
+		x: 100,
+		y: 100,
 		color: '#ffcc00',
 		vitals: new Vitals({
 			systolic_bp: 110,
@@ -117,8 +108,8 @@ Model.prototype.initVictims = function(){
 		sample: 'deformity on head, no allergies, no med history',
 		weight: 65
 	},{
-		x: 150,
-		y: 150,
+		x: 250,
+		y: 250,
 		color: '#dcdcdc',
 		vitals: new Vitals({
 			systolic_bp: 90,
@@ -183,6 +174,23 @@ Model.prototype.updateActorX = function(actor){
 Model.prototype.updateActorY = function(actor){
 
 };//end of updateActorY
+
+Model.prototype.initInjury = function(){
+
+	$('#head').css("background-image", 'url(images/builder/healthy-head.png)');
+	$('#armR').css("background-image", 'url(images/builder/right-arm-healthy.png)');
+	$('#armL').css("background-image", 'url(images/builder/left-arm-healthy.png)');
+	$('#torso').css("background-image",'url(images/builder/torso-healthy.png)');
+	$('#pelvis').css("background-image",'url(images/builder/pants.png)');
+	$('#legR').css("background-image", 'url(images/builder/right-leg-healthy.png)');
+	$('#legL').css("background-image", 'url(images/builder/left-leg-healthy.png)');
+	
+} //end of initInjury
+
+Model.prototype.updateInjury = function() {
+
+
+} //end of updateInjury
 
 
 

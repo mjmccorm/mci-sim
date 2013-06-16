@@ -12,7 +12,7 @@ function Tag(config){
 }//end of Vitals
 
 Tag.prototype.draw = function(){
-	console.log('tag ' + this.id);
+	
 	var layer = this.controller.view.layer;
 	var stage = this.controller.view.stage;
 	

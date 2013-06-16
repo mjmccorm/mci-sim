@@ -23,15 +23,17 @@
         </style>	
 		
 	<link rel="stylesheet" type="text/css" href="css/person.css"/>
-	<script src="js/kinetic-v4.5.4.min.js"></script>
-	<script src="js/animation.js"></script>
-	<script src="js/Controller.js"></script>
-	<script src="js/Model.js"></script>
-	<script src="js/View.js"></script>
-	<script src="js/Vitals.js"></script>
-	<script src="js/Tag.js"></script>
-	<script src="js/Actor.js"></script>
-	<script src="js/HealthBar.js"></script>
+	<script type="text/javascript" src="js/kinetic-v4.5.4.min.js"></script>
+	<script type="text/javascript" src="js/jquery-latest.js"></script>
+	<script type="text/javascript" src="js/animation.js"></script>
+	<script type="text/javascript" src="js/Controller.js"></script>
+	<script type="text/javascript" src="js/Model.js"></script>
+	<script type="text/javascript" src="js/View.js"></script>
+	<script type="text/javascript" src="js/Injury.js"></script>
+	<script type="text/javascript" src="js/Vitals.js"></script>
+	<script type="text/javascript" src="js/Tag.js"></script>
+	<script type="text/javascript" src="js/Actor.js"></script>
+	<script type="text/javascript" src="js/HealthBar.js"></script>
 	<script>
 		window.onload = function(){
 		new Controller("myCanvas");
@@ -41,16 +43,14 @@
 	
 	<body>
 	
-<div id="builderContainer" class="builder">			
-	<div id="preview">
-		<div style="background-image: url(&quot;images/builder/healthy-head.png?1371319320.756&quot;); height: 121px; width: 72px;" class="head"></div>
-		<div style="background-image: url(&quot;images/builder/right-arm-healthy.png?1371319320.756&quot;); height: 198px; width: 147px;" class="armR"></div>
-		<div style="background-image: url(&quot;images/builder/left-arm-healthy.png?1371319320.756&quot;); height: 196px; width: 181px;" class="armL"></div>
-		<div style="background-image: url(&quot;images/builder/torso-healthy.png?1371319320.756&quot;); height: 231px; width: 189px;" class="torso"></div>
-		<div style="background-image: url(&quot;images/builder/pants.png?1371319320.756&quot;); height: 157px; width: 171px;" class="pelvis"></div>
-		<div style="background-image: url(&quot;images/builder/right-leg-healthy.png?1371319320.756&quot;); height: 287px; width: 127px;" class="legR"></div>
-		<div style="background-image: url(&quot;images/builder/left-leg-healthy.png?1371319320.756&quot;); height: 280px; width: 144px; " class="legL"></div>
-	</div>
+<div id="preview" class="builder">
+	<div style="height: 121px; width: 72px;" id="head"></div>
+	<div style="height: 198px; width: 147px;" id="armR"></div>
+	<div style="height: 196px; width: 181px;" id="armL"></div>
+	<div style="height: 231px; width: 189px;" id="torso"></div>
+	<div style="height: 157px; width: 171px;" id="pelvis"></div>
+	<div style="height: 287px; width: 127px;" id="legR"></div>
+	<div style="height: 280px; width: 144px; " id="legL"></div>
 </div>
 
 	<div id="background" width="900" height="600"></div>

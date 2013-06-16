@@ -93,6 +93,7 @@ Controller.prototype.initGame = function(){
 	var view = this.view;
 	model.initVictims();
 	model.initHealthBar();
+	model.initTags();
     // game is now ready to play
     this.state = this.states.READY;
     view.drawStage();

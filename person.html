@@ -63,26 +63,13 @@ var bodyParts = [
 	
 var injuries = [
 	{
-	name: 'healthy',
-	color: 'rgb(166, 27,73)',
-		bodyParts: {
-		head: 'images/builder/healthy-head.png',
-		armR: 'images/builder/right-arm-healthy.png',
-		armL: 'images/builder/left-arm-healthy.png',
-		torso: 'images/builder/torso-healthy.png',
-		pelvis: 'images/builder/pants.png',
-		legR: 'images/builder/right-leg-healthy.png',
-		legL: 'images/builder/left-leg-healthy.png'
-		},
-	},
-	{
 	name: 'amputation',
 	color: 'rgb(255,255,255)',
 	bodyParts: {
-		head: 'images/builder/healthy-head.png',
+		head: 'images/builder/head-amputation.png',
 		armL: 'images/builder/left-arm-amputation.png',
-		torso: 'images/builder/healthy-head.png',
-		pelvis: 'images/builder/healthy-head.png',
+		torso: 'images/builder/torso-amputation.png',
+		pelvis: 'images/builder/pelvis-gsw.png',
 		legR: 'images/builder/right-leg-amputation.png',
 		legL: 'images/builder/left-leg-amputation.png'
 		},
@@ -91,13 +78,13 @@ var injuries = [
 	name: 'contusion',
 	color: 'rgb(166, 27,73)',
 		bodyParts: {
-		head: 'images/builder/healthy-head.png',
-		armR: 'images/builder/right-arm-healthy.png',
-		armL: 'images/builder/left-arm-healthy.png',
-		torso: 'images/builder/torso-healthy.png',
+		head: 'images/builder/head-contusion.png',
+		armR: 'images/builder/right-arm-contusion.png',
+		armL: 'images/builder/left-arm-contusion.png',
+		torso: 'images/builder/torso-contusion.png',
 		pelvis: 'images/builder/pants.png',
-		legR: 'images/builder/right-leg-healthy.png',
-		legL: 'images/builder/left-leg-healthy.png'
+		legR: 'images/builder/right-leg-contusion.png',
+		legL: 'images/builder/left-leg-contusion.png'
 		},
 	},
 	{
@@ -176,6 +163,7 @@ function getRandomColor(){
 
 function init(){
 
+	/*
 	$('#head').css("background-color", getRandomColor());
 	$('#armR').css("background-color", getRandomColor());
 	$('#armL').css("background-color", getRandomColor());
@@ -183,6 +171,7 @@ function init(){
 	$('#pelvis').css("background-color", getRandomColor());
 	$('#legR').css("background-color", getRandomColor());
 	$('#legL').css("background-color", getRandomColor());
+	*/
 	
 	$('#head').css("background-image", 'url(images/builder/healthy-head.png)');
 	$('#armR').css("background-image", 'url(images/builder/right-arm-healthy.png)');
@@ -206,7 +195,7 @@ $(document).ready(function() {
 	console.log('selectedInjuredPart:' + selectedInjuredPart.imgSrc);
 	var hue = selectedInjury.color;
 	//var hue = getRandomColor();
-	$('#' + selectedPart).css("background-color", hue);
+	//$('#' + selectedPart).css("background-color", hue);
 	$('#' + selectedInjuredPart.name).css("background-image", 'url(' + selectedInjuredPart.imgSrc + ')');
 	
 	console.log(selectedInjury.name);
