@@ -76,13 +76,17 @@ Actor.prototype.draw = function(){
 		
 		model.initInjury();
 		console.log("injuries:" + that.injuries.length);
+		var personDataText = "ABC:" + that.abc + " ";
 		for(var i=0; i < that.injuries.length; i++){
 			var selectedInjuredPart = that.injuries[i];
 			console.log("injuries[i]:" +injuries[i]);
 			console.log(i+ ":" + selectedInjuredPart.name + "," + selectedInjuredPart.imgSrc);
+			personDataText += selectedInjuredPart.injury + " " + selectedInjuredPart.name + ',';
 			$('#' + selectedInjuredPart.name).css("background-image", 'url(' + selectedInjuredPart.imgSrc + ')');
 		}
 		model.initClothes(that);
+		
+		$('#personData').text(personDataText);
 		
 	});
 

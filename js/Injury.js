@@ -79,7 +79,8 @@ function getRandomInjuredPart(injury){
 	
 	var obj = {
 		name: partsNames[index],
-		imgSrc: partsImages[index]
+		imgSrc: partsImages[index],
+		injury: injury.name
 		};
 		
 	return obj;
