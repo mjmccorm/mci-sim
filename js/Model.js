@@ -148,7 +148,11 @@ Model.prototype.initVictims = function(){
 			  sample: victimStartConfig[n].sample
 		})
 
-
+		//random generate # of injuries
+		//need to figure out how to not duplicate injuries.
+		person.injureActor();
+		person.injureActor();
+		
 		//Each victim should get a timer
 		//http://dev.w3.org/html5/spec-LC/timers.html
 		var model = this;
@@ -186,6 +190,33 @@ Model.prototype.initInjury = function(){
 	$('#legL').css("background-image", 'url(images/builder/left-leg-healthy.png)');
 	
 } //end of initInjury
+
+Model.prototype.initClothes = function(actor){
+
+	if(actor.clothes == true){
+		$('#armRClothes').css("background-image", 'url(images/builder/right-arm-clothes.png)');
+		$('#armLClothes').css("background-image", 'url(images/builder/left-arm-clothes.png)');
+		$('#torsoClothes').css("background-image",'url(images/builder/torso-clothes.png)');
+	
+		$('#armRClothes').click(function(){
+			$('#armRClothes').css("background-image", 'none');
+			actor.clothes = false;
+		});
+	
+		$('#armLClothes').click(function(){
+			$('#armLClothes').css("background-image", 'none');
+			actor.clothes = false;
+		});
+	
+		$('#torsoClothes').click(function(){
+			$('#torsoClothes').css("background-image", 'none');
+			actor.clothes = false;
+		});
+	}else{
+		//do nothing
+	}
+	
+}
 
 Model.prototype.updateInjury = function() {
 

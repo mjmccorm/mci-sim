@@ -17,11 +17,23 @@ function Actor(config){
 	this.abc = config.abc; //airway, breathing, circulation
 	this.ample = config.ample; //signs & symptoms, allergies, medications, etc.
 	this.weight = config.weight;  //kilograms
+	this.injuries = [];
+	this.clothes = false;
 }
 
-Actor.prototype.damage = function(){
+Actor.prototype.injureActor = function(){
 
-	this.health = this.health <= 0 ? 0 : this.health - 1;
+		var selectedInjury = getRandomInjury();
+		console.log("Selected:" + selectedInjury.name);
+		var selectedInjuredPart = getRandomInjuredPart(selectedInjury);
+		console.log('selectedInjuredPart:' + selectedInjuredPart.name);
+		console.log('selectedInjuredPart:' + selectedInjuredPart.imgSrc);
+		//var hue = selectedInjury.color;
+		//var hue = getRandomColor();
+		//$('#' + selectedPart).css("background-color", hue);
+		
+		console.log(selectedInjuredPart.name);
+		this.injuries.push(selectedInjuredPart);
 	
 };
 
@@ -63,19 +75,15 @@ Actor.prototype.draw = function(){
 		stage.draw();
 		
 		model.initInjury();
+		console.log("injuries:" + that.injuries.length);
+		for(var i=0; i < that.injuries.length; i++){
+			var selectedInjuredPart = that.injuries[i];
+			console.log("injuries[i]:" +injuries[i]);
+			console.log(i+ ":" + selectedInjuredPart.name + "," + selectedInjuredPart.imgSrc);
+			$('#' + selectedInjuredPart.name).css("background-image", 'url(' + selectedInjuredPart.imgSrc + ')');
+		}
+		model.initClothes(that);
 		
-		var selectedInjury = getRandomInjury();
-		console.log("Selected:" + selectedInjury.name);
-		var selectedInjuredPart = getRandomInjuredPart(selectedInjury);
-
-		console.log('selectedInjuredPart:' + selectedInjuredPart.name);
-		console.log('selectedInjuredPart:' + selectedInjuredPart.imgSrc);
-		//var hue = selectedInjury.color;
-		//var hue = getRandomColor();
-		//$('#' + selectedPart).css("background-color", hue);
-		$('#' + selectedInjuredPart.name).css("background-image", 'url(' + selectedInjuredPart.imgSrc + ')');
-		console.log(selectedInjury.name);
-
 	});
 
 };
