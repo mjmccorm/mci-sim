@@ -19,6 +19,7 @@ function Actor(config){
 	this.weight = config.weight;  //kilograms
 	this.injuries = [];
 	this.clothes = false;
+	this.selected = false;
 }
 
 Actor.prototype.injureActor = function(){
@@ -59,7 +60,9 @@ Actor.prototype.draw = function(){
         stroke: 'black',
         strokeWidth: 4,
         draggable: true,
-	   name: this.id,
+		id: this.id,
+	   //name: this.id,
+	   name: 'person',
 	   type: 'person'
       });
 	  
@@ -67,13 +70,26 @@ Actor.prototype.draw = function(){
 	stage.add(layer);
 	console.log("added " + box.attrs.name);
 
+	box.on('mouseover', function(){
+		this.setFill('red');
+		layer.draw();
+		
+	});
+	box.on('mouseout', function(){
+		if(that.selected == false){
+			this.setFill(that.color);
+			layer.draw();
+		}
+		
+	});
 	box.on('dblclick', function(){
 		var healthBar = stage.get('#VitalsDisplay');
 		model.updateHealthBar(that.current_vitals);
 		healthBar.remove();
 		view.drawHealthBar();
+		view.drawSelected(that);
+		this.setFill('red');
 		stage.draw();
-		
 		model.initInjury();
 		console.log("injuries:" + that.injuries.length);
 		var personDataText = "ABC:" + that.abc + " ";

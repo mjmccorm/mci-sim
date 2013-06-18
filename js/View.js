@@ -243,7 +243,22 @@ View.prototype.drawBackground = function(){
 	//stage.draw();
 		
 };//end of drawBackground
+View.prototype.drawSelected = function(actor){
 
+	var controller = this.controller;
+	var model = controller.model;
+	stage = this.stage;
+
+	for(var i=0; i< model.victims.length; i++){
+		model.victims[i].selected = false;
+		var person = stage.get('#' + model.victims[i].id);
+		person[0].setFill(model.victims[i].color);
+		console.log(person);
+	}
+	actor.selected = true;
+	stage.draw();
+	
+}; //end of drawSelected
 View.prototype.drawStage = function(){
 
     var controller = this.controller;
