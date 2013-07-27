@@ -1,5 +1,5 @@
 /*-----------------------------------------------------------*/
-//Tag - object that stores vital signs on a person
+//Tag - object that stores the triage status of a person
 /*-----------------------------------------------------------*/
 function Tag(config){
 
@@ -9,7 +9,7 @@ function Tag(config){
 	this.id = config.id;
 	this.person_id = config.person_id || '';
 	
-}//end of Vitals
+}//end of Tag
 
 Tag.prototype.draw = function(){
 	
@@ -82,5 +82,50 @@ Tag.prototype.draw = function(){
 	triage_tag.setScale(0.3);
 	layer.add(triage_tag);
 	triage_tag.moveToTop();
+	
+	triage_tag.on('mousedown',function(){
+		this.moveToTop();
+	});
+	
+	triage_tag.on('mouseup', function(){
+		// Detect shapes under mouse position
+		var pos = stage.getMousePosition();
+		var collidingShapes = stage.getAllIntersections(pos);
+		
+		for (var i = 0; i < collidingShapes.length; i++){
+			if(collidingShapes[i].attrs.type == "person"){
+				console.log(collidingShapes[i].attrs.id);
+				console.log("Triage Tag: " + this.attrs.id + " belongs to person: " + collidingShapes[i].attrs.id);
+				//create a new group with this and collidingShapes[i]
+				var tagged_person = new Kinetic.Group({
+					id: 'g'+this.id,
+					x: this.x,
+					y: this.y,
+					draggable: true,
+					type: 'tagged_person'
+					});
+				this.setDraggable(false);
+				collidingShapes[i].setDraggable(false);
+				tagged_person.add(this);
+				tagged_person.add(collidingShapes[i]);
+				layer.add(tagged_person);
+				tagged_person.moveToTop();
+				
+				//reposition the tag off to one side
+				//disable to moveToTop listeners for person
+				
+				break;
+			}
+		}
+	});
+	
+	/*triage_tag.on('mouseup',function(){
+		var pos=stage.getMousePosition();
+		var mouseX=parseInt(pos.x);
+		var mouseY=parseInt(pos.y);
+		console.log("x:" + mouseX + ",y:" + mouseY);
+		//this should see if any people underneath and who don't already have tags
+	});
+	*/
 	
 }; //end of drawTag

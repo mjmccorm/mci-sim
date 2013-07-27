@@ -70,11 +70,21 @@ Actor.prototype.draw = function(){
 	stage.add(layer);
 	console.log("added " + box.attrs.name);
 
+	box.on('mousedown', function(){
+		this.moveToTop();
+	});
+	box.on('mouseup',function(){
+		var pos=stage.getMousePosition();
+		var mouseX=parseInt(pos.x);
+		var mouseY=parseInt(pos.y);
+		console.log("x:" + mouseX + ",y:" + mouseY);
+		
+	});
 	box.on('mouseover', function(){
 		this.setFill('red');
 		layer.draw();
-		
 	});
+	
 	box.on('mouseout', function(){
 		if(that.selected == false){
 			this.setFill(that.color);
