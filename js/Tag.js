@@ -15,6 +15,7 @@ Tag.prototype.draw = function(){
 	
 	var layer = this.controller.view.layer;
 	var stage = this.controller.view.stage;
+	var model = this.controller.model;
 	
 	var triage_tag = new Kinetic.Group({
 	id: this.id,
@@ -96,6 +97,10 @@ Tag.prototype.draw = function(){
 			if(collidingShapes[i].attrs.type == "person"){
 				console.log(collidingShapes[i].attrs.id);
 				console.log("Triage Tag: " + this.attrs.id + " belongs to person: " + collidingShapes[i].attrs.id);
+				
+				//Check to see if person already has tag
+				//var result = $.grep(model.victims, function(e){ return e.id == id; });
+				
 				//create a new group with this and collidingShapes[i]
 				var tagged_person = new Kinetic.Group({
 					id: 'g'+this.id,
